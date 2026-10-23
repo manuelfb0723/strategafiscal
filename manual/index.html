@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Manual Factura Emprende</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="../img/icono.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<style id="estilo-puerta">
+/* Puerta del manual: tarjeta de acceso sobre azul marino; ya dentro, barra delgada y el manual a pantalla completa. */
+:root {
+  --navy: #0b1d45; --navy-2: #13306c; --gold: #c9a13b; --gold-2: #e5c26a;
+  --bg: #ffffff; --ink: #111c33; --muted: #56627a; --line: #dbe1ec; --error: #c62828;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Figtree", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root { --bg: #121d38; --ink: #e9edf6; --muted: #a2adc4; --line: #2a3a5f; --error: #ff7b7b; color-scheme: dark; } }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body { margin: 0; background: radial-gradient(120% 90% at 85% 10%, var(--navy-2) 0%, var(--navy) 60%); color: var(--ink); font: 400 16px/1.5 var(--f-body); }
+a { color: inherit; }
+button, input { font: inherit; }
+:focus-visible { outline: 3px solid var(--gold-2); outline-offset: 2px; border-radius: 8px; }
+
+.puerta { min-height: 100%; display: grid; place-items: center; padding: 32px max(16px, env(safe-area-inset-right, 0px)) 32px max(16px, env(safe-area-inset-left, 0px)); }
+.tarjeta { width: 100%; max-width: 420px; background: var(--bg); border-radius: 20px; padding: 32px 28px; box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); }
+.marca { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+.marca img { width: 44px; height: auto; }
+.marca b { display: block; font: 800 20px var(--f-display); }
+.marca span { color: var(--muted); font-size: 14px; }
+h1 { font: 800 26px/1.15 var(--f-display); margin: 0 0 6px; }
+.sub { color: var(--muted); margin: 0 0 22px; font-size: 15px; }
+label { display: block; font-weight: 600; font-size: 14px; margin: 14px 0 6px; }
+input[type=email], input[type=password] { width: 100%; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 12px; background: transparent; color: var(--ink); }
+input:focus { border-color: var(--gold); outline: none; }
+.boton { width: 100%; margin-top: 22px; padding: 13px; border: 0; border-radius: 12px; background: var(--navy); color: #fff; font-weight: 700; cursor: pointer; }
+@media (prefers-color-scheme: dark) { .boton { background: var(--gold-2); color: #1a1405; } }
+.boton[disabled] { opacity: .6; cursor: wait; }
+.error { color: var(--error); font-size: 14px; margin: 12px 0 0; min-height: 1.2em; }
+.ayuda { color: var(--muted); font-size: 14px; margin: 18px 0 0; }
+.volver { display: block; text-align: center; margin-top: 18px; color: #c9d3ea; font-size: 14px; }
+
+.dentro { position: fixed; inset: 0; display: flex; flex-direction: column; background: #fff; }
+.barra { flex: none; display: flex; align-items: center; gap: 12px; padding: 8px max(16px, env(safe-area-inset-right, 0px)) 8px max(16px, env(safe-area-inset-left, 0px)); padding-top: calc(8px + env(safe-area-inset-top, 0px)); background: var(--navy); color: #fff; font-size: 14px; }
+.barra img { width: 24px; }
+.barra .quien { margin-left: auto; color: #b9c4dd; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.barra button, .barra label.subir { flex: none; background: rgba(255,255,255,.12); color: #fff; border: 0; border-radius: 8px; padding: 6px 10px; cursor: pointer; font-weight: 600; font-size: 13px; margin: 0; }
+.barra button:hover, .barra label.subir:hover { background: rgba(255,255,255,.2); }
+.aviso { max-width: 520px; margin: 0 auto; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+</head>
+<body>
+
+<div class="puerta" id="puerta">
+  <div>
+    <form class="tarjeta" id="acceso" novalidate>
+      <div class="marca"><img src="../img/escudo.png" alt=""><div><b>Stratega Fiscal</b><span>Manual de Factura Emprende</span></div></div>
+      <h1>Entra al manual</h1>
+      <p class="sub">Usa el mismo correo y contraseña con los que abres la app.</p>
+      <label for="correo">Correo</label>
+      <input type="email" id="correo" autocomplete="username" required>
+      <label for="clave">Contraseña</label>
+      <input type="password" id="clave" autocomplete="current-password" required>
+      <button class="boton" id="entrar" type="submit">Entrar</button>
+      <p class="error" id="error" role="alert"></p>
+      <p class="ayuda">¿Olvidaste tu contraseña? Cámbiala desde la app con <b>Olvidé mi contraseña</b>.</p>
+    </form>
+    <div class="tarjeta aviso" id="sin-acceso" hidden>
+      <div class="marca"><img src="../img/escudo.png" alt=""><div><b>Stratega Fiscal</b><span>Manual de Factura Emprende</span></div></div>
+      <h1 id="aviso-titulo">Tu cuenta aún no tiene acceso</h1>
+      <p class="sub" id="aviso-texto">El manual es para clientes de Factura Emprende. Abre la app en tu celular o computadora, activa tu licencia y entra con esta cuenta; después vuelve aquí.</p>
+      <div id="subir-primero" hidden>
+        <p class="sub">Eres administrador y todavía no hay un manual publicado. Elige el archivo <b>manual.html</b> para publicarlo.</p>
+        <label class="boton" style="display:block;text-align:center" for="archivo-a">Elegir manual.html</label>
+        <input type="file" id="archivo-a" accept=".html,text/html" hidden>
+      </div>
+      <button class="boton" type="button" id="salir-2">Cerrar sesión</button>
+    </div>
+    <a class="volver" href="../">← Volver a Stratega Fiscal</a>
+  </div>
+</div>
+
+<div id="dentro" hidden>
+  <div class="barra">
+    <a href="../" title="Stratega Fiscal"><img src="../img/escudo.png" alt="Stratega Fiscal"></a>
+    <span class="quien" id="quien"></span>
+    <label class="subir" for="archivo" id="subir" hidden>Actualizar manual</label>
+    <button type="button" id="salir">Cerrar sesión</button>
+  </div>
+  <div id="archivo-holder"><input type="file" id="archivo" accept=".html,text/html" hidden></div>
+</div>
+
+<script>
+const sb = supabase.createClient(
+  "https://vtyuyvmmygjyqxzzrqnu.supabase.co",
+  "sb_publishable_2bXYTt-KabmY0TS83zjitw__ImK8EmY"
+);
+const $ = id => document.getElementById(id);
+
+async function mostrar(sesion) {
+  $("quien").textContent = sesion.user.email;
+  const admin = (await sb.rpc("es_admin")).data === true;
+  const { data, error } = await sb.from("manual").select("html, version").eq("id", "factura-emprende").maybeSingle();
+  if (error) { avisar("No se pudo abrir el manual", "Revisa tu conexión a internet e inténtalo de nuevo."); return; }
+  if (!data) {
+    avisar(admin ? "Falta publicar el manual" : "Tu cuenta aún no tiene acceso",
+      admin ? "" : "El manual es para clientes de Factura Emprende. Abre la app en tu celular o computadora, activa tu licencia y entra con esta cuenta; después vuelve aquí.");
+    $("subir-primero").hidden = !admin;
+    return;
+  }
+  abrirManual(data.html, sesion.user.email, admin);
+  document.title = "Manual Factura Emprende " + data.version;
+}
+
+/* Pone el manual en esta misma página: sus estilos, su contenido y su script.
+   Así los enlaces entre guías (#guia) y las imágenes (img/...) funcionan igual que en el portal. */
+function abrirManual(html, correo, admin) {
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  document.getElementById("estilo-puerta").remove();
+  doc.head.querySelectorAll('style, link[rel="stylesheet"]').forEach(n => document.head.appendChild(document.importNode(n, true)));
+  const barra = $("dentro").querySelector(".barra");
+  barra.style.cssText = "display:flex;align-items:center;gap:12px;padding:8px max(16px, env(safe-area-inset-right, 0px)) 8px max(16px, env(safe-area-inset-left, 0px));background:#071331;color:#fff;font:500 14px/1.4 Figtree, 'Segoe UI', system-ui, sans-serif";
+  barra.querySelectorAll("button, label").forEach(b => b.style.cssText = "flex:none;background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:8px;padding:6px 10px;cursor:pointer;font:600 13px Figtree, 'Segoe UI', system-ui, sans-serif");
+  barra.querySelector("img").style.cssText = "width:24px;display:block";
+  $("quien").style.cssText = "margin-left:auto;color:#b9c4dd;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0";
+  $("quien").textContent = correo;
+  $("subir").hidden = !admin;
+  document.body.replaceChildren(barra, $("archivo-holder"));
+  doc.body.querySelectorAll(":scope > :not(script)").forEach(n => document.body.appendChild(document.importNode(n, true)));
+  doc.body.querySelectorAll("script").forEach(s => {
+    const n = document.createElement("script");
+    n.textContent = s.textContent;
+    document.body.appendChild(n);
+  });
+}
+
+function avisar(titulo, texto) {
+  $("acceso").hidden = true; $("sin-acceso").hidden = false;
+  $("aviso-titulo").textContent = titulo; $("aviso-texto").textContent = texto;
+  $("aviso-texto").hidden = !texto;
+}
+
+$("acceso").addEventListener("submit", async e => {
+  e.preventDefault();
+  $("error").textContent = "";
+  const correo = $("correo").value.trim(), clave = $("clave").value;
+  if (!correo || !clave) { $("error").textContent = "Escribe tu correo y tu contraseña."; return; }
+  $("entrar").disabled = true; $("entrar").textContent = "Entrando…";
+  const { data, error } = await sb.auth.signInWithPassword({ email: correo, password: clave });
+  $("entrar").disabled = false; $("entrar").textContent = "Entrar";
+  if (error) {
+    $("error").textContent = /confirm/i.test(error.message)
+      ? "Primero confirma tu correo con el enlace que te enviamos al crear tu cuenta."
+      : /invalid/i.test(error.message) ? "El correo o la contraseña no son correctos." : "No se pudo entrar. Revisa tu conexión e inténtalo de nuevo.";
+    return;
+  }
+  mostrar(data.session);
+});
+
+async function salir() {
+  await sb.auth.signOut();
+  location.reload();
+}
+$("salir").addEventListener("click", salir);
+$("salir-2").addEventListener("click", salir);
+
+async function publicar(input) {
+  const f = input.files[0]; input.value = "";
+  if (!f) return;
+  const html = await f.text();
+  if (!html.includes("Factura Emprende")) { alert("Ese archivo no parece el manual."); return; }
+  const version = (html.match(/versión <b>([\d.]+)<\/b>/) || [])[1] || "";
+  const { error } = await sb.from("manual").upsert({ id: "factura-emprende", version, html, actualizado: new Date().toISOString() });
+  if (error) { alert("No se pudo publicar: " + error.message); return; }
+  location.reload();
+}
+$("archivo").addEventListener("change", e => publicar(e.target));
+$("archivo-a").addEventListener("change", e => publicar(e.target));
+
+sb.auth.getSession().then(({ data }) => { if (data.session) mostrar(data.session); });
+</script>
+</body>
+</html>

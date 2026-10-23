@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stratega Fiscal</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Stratega Fiscal: contabilidad y asesoría fiscal en Baja California, y Factura Emprende, la app para facturar, cobrar y vender desde tu celular o computadora.">
+<link rel="icon" href="img/icono.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,500,1,0&display=block">
+<style>
+/* Una sola página: banda azul marino con el escudo dorado arriba, secciones claras abajo; el dorado solo para acentos y precios. */
+:root {
+  --navy: #0b1d45;
+  --navy-2: #13306c;
+  --gold: #c9a13b;
+  --gold-2: #e5c26a;
+  --bg: #ffffff;
+  --soft: #f3f5f9;
+  --ink: #111c33;
+  --muted: #56627a;
+  --line: #e1e6ef;
+  --card: #ffffff;
+  --ok: #138a4f;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Figtree", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0a1022; --soft: #0f1830; --ink: #e9edf6; --muted: #a2adc4; --line: #23304f; --card: #121d38;
+    --gold: #d8b456; --ok: #3cc77f; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0a1022; --soft: #0f1830; --ink: #e9edf6; --muted: #a2adc4; --line: #23304f; --card: #121d38;
+  --gold: #d8b456; --ok: #3cc77f; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--ink); font: 400 17px/1.6 var(--f-body); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--navy); }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.1; margin: 0; text-wrap: balance; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--gold-2); outline-offset: 3px; border-radius: 8px; }
+.ms { font-family: "Material Symbols Rounded"; font-weight: normal; font-style: normal; line-height: 1; letter-spacing: normal; text-transform: none; white-space: nowrap; direction: ltr; -webkit-font-smoothing: antialiased; font-feature-settings: "liga"; display: inline-block; width: 1em; overflow: hidden; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+section { padding-block: 84px; }
+section[id] { scroll-margin-top: 72px; }
+.eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+.titulo { font-size: clamp(30px, 4.4vw, 46px); font-weight: 800; margin-top: 8px; }
+.lead { color: var(--muted); max-width: 62ch; margin: 14px 0 0; font-size: 18px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 12px; font-weight: 700; font-size: 16px; text-decoration: none; border: 2px solid transparent; transition: transform .15s ease, background .15s ease; }
+.btn:hover { transform: translateY(-1px); }
+.btn-oro { background: var(--gold-2); color: #1a1405; }
+.btn-oro:hover { background: #efcf7c; }
+.btn-linea { border-color: rgba(255,255,255,.4); color: #fff; }
+.btn-linea:hover { background: rgba(255,255,255,.08); }
+.btn-azul { background: var(--navy); color: #fff; }
+:root[data-theme="dark"] .btn-azul { background: var(--navy-2); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn-azul { background: var(--navy-2); } }
+
+/* ---------- Encabezado ---------- */
+header.barra { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--navy); color: #fff; border-bottom: 1px solid rgba(255,255,255,.08); }
+.barra .wrap { display: flex; align-items: center; gap: 18px; height: 64px; }
+.marca { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--f-display); font-weight: 800; font-size: 19px; letter-spacing: .01em; }
+.marca img { width: 30px; height: auto; }
+.marca span b { color: var(--gold-2); font-weight: 800; }
+nav.menu { margin-left: auto; display: flex; gap: 4px; align-items: center; }
+nav.menu a { text-decoration: none; font-size: 15px; font-weight: 600; color: #cfd8ec; padding: 8px 10px; border-radius: 8px; }
+nav.menu a:hover { color: #fff; background: rgba(255,255,255,.07); }
+nav.menu a.cta { background: var(--gold-2); color: #1a1405; margin-left: 6px; }
+.abrir { display: none; margin-left: auto; background: none; border: 0; color: #fff; padding: 8px; cursor: pointer; }
+.abrir .ms { font-size: 28px; }
+@media (max-width: 900px) {
+  .abrir { display: block; }
+  nav.menu { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; align-items: stretch; background: var(--navy); padding: 8px max(20px, env(safe-area-inset-right, 0px)) 16px max(20px, env(safe-area-inset-left, 0px)); border-bottom: 1px solid rgba(255,255,255,.1); }
+  nav.menu.abierto { display: flex; }
+  nav.menu a { padding: 12px 10px; }
+  nav.menu a.cta { margin: 6px 0 0; text-align: center; }
+}
+
+/* ---------- Portada ---------- */
+.hero { background: radial-gradient(120% 90% at 85% 10%, var(--navy-2) 0%, var(--navy) 55%); color: #fff; padding-block: 72px 0; overflow: hidden; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 40px; align-items: center; }
+.hero h1 { font-size: clamp(36px, 5.2vw, 58px); font-weight: 800; letter-spacing: -.01em; }
+.hero h1 em { font-style: normal; color: var(--gold-2); }
+.hero p { color: #c9d3ea; font-size: 19px; max-width: 52ch; margin: 18px 0 28px; }
+.hero .acciones { display: flex; flex-wrap: wrap; gap: 12px; }
+.hero .datos { display: flex; flex-wrap: wrap; gap: 10px 26px; margin: 34px 0 0; padding: 0; list-style: none; color: #b7c3de; font-size: 15px; }
+.hero .datos li { display: flex; align-items: center; gap: 8px; }
+.hero .datos .ms { color: var(--gold-2); font-size: 20px; }
+.escena { position: relative; align-self: end; min-height: 420px; }
+.escena .caballo { position: absolute; right: -40px; top: -10px; width: 360px; max-width: 70%; opacity: .14; pointer-events: none; }
+.monitor { position: relative; margin-top: 40px; background: #050a18; border-radius: 14px 14px 0 0; padding: 10px 10px 0; box-shadow: 0 -10px 60px -20px rgba(0,0,0,.6); }
+.monitor img { display: block; width: 100%; height: auto; aspect-ratio: 1366 / 800; border-radius: 6px 6px 0 0; }
+.cel { position: absolute; left: -34px; bottom: 0; width: 34%; max-width: 200px; background: #050a18; border-radius: 24px 24px 0 0; padding: 7px 6px 0; box-shadow: 0 0 0 2px rgba(255,255,255,.08), 18px 0 40px -14px rgba(0,0,0,.6); }
+.cel img { display: block; width: 100%; height: auto; aspect-ratio: 540 / 1140; border-radius: 18px 18px 0 0; object-fit: cover; object-position: top; max-height: 330px; }
+@media (max-width: 900px) {
+  .hero .wrap { grid-template-columns: minmax(0, 1fr); }
+  .escena { min-height: 0; }
+  .cel { left: 0; width: 30%; }
+}
+
+/* ---------- Servicios ---------- */
+.servicios { background: var(--bg); }
+.grid-serv { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 40px; }
+.serv { border: 1px solid var(--line); border-radius: 16px; padding: 24px; background: var(--card); display: grid; gap: 10px; align-content: start; }
+.serv .ico { width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; background: color-mix(in srgb, var(--gold) 16%, transparent); color: var(--gold); }
+.serv .ico .ms { font-size: 26px; }
+.serv h3 { font-size: 20px; font-weight: 700; }
+.serv p { margin: 0; color: var(--muted); font-size: 16px; }
+.serv ul { margin: 4px 0 0; padding-left: 18px; color: var(--muted); font-size: 15px; }
+@media (max-width: 900px) { .grid-serv { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .grid-serv { grid-template-columns: minmax(0, 1fr); } }
+
+
+.proceso { list-style: none; padding: 0; margin: 44px 0 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; counter-reset: paso; }
+.proceso li { counter-increment: paso; position: relative; display: grid; gap: 4px; padding: 18px 16px; border-radius: 14px; background: var(--soft); }
+.proceso li::before { content: counter(paso); position: absolute; top: 14px; right: 16px; font: 800 26px var(--f-display); color: color-mix(in srgb, var(--gold) 45%, transparent); }
+.proceso .ms { font-size: 26px; color: var(--gold); }
+.proceso b { font-size: 16px; }
+.proceso span:not(.ms) { color: var(--muted); font-size: 14px; }
+@media (max-width: 900px) { .proceso { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .proceso { grid-template-columns: minmax(0, 1fr); } }
+.serv a { color: var(--gold); font-weight: 600; }
+
+/* ---------- App ---------- */
+.app { background: var(--soft); }
+.app-top { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: end; }
+.plataformas { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 99px; background: var(--card); border: 1px solid var(--line); font-size: 14px; font-weight: 600; }
+.chip .ms { font-size: 18px; color: var(--gold); }
+.funciones { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px 24px; margin: 44px 0 52px; padding: 0; list-style: none; }
+.funciones li { display: grid; gap: 6px; }
+.funciones .ms { font-size: 28px; color: var(--navy-2); }
+:root[data-theme="dark"] .funciones .ms { color: var(--gold-2); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .funciones .ms { color: var(--gold-2); } }
+.funciones b { font-size: 17px; }
+.funciones span { color: var(--muted); font-size: 15px; }
+@media (max-width: 900px) { .funciones { grid-template-columns: repeat(2, minmax(0, 1fr)); } .app-top { grid-template-columns: minmax(0, 1fr); } }
+.galeria { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
+.galeria figure { margin: 0; display: grid; gap: 10px; justify-items: center; }
+.tel { background: #0b111c; border-radius: 26px; padding: 8px 7px 12px; width: 100%; max-width: 240px; box-shadow: 0 16px 34px -18px rgba(11, 29, 69, .5); }
+.tel img { display: block; width: 100%; height: auto; aspect-ratio: 540 / 1140; border-radius: 19px; }
+.galeria figcaption { font-size: 14px; color: var(--muted); text-align: center; }
+@media (max-width: 900px) { .galeria { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* ---------- Precios ---------- */
+.planes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 44px; align-items: stretch; }
+.plan { position: relative; border: 1px solid var(--line); border-radius: 18px; padding: 28px 26px; background: var(--card); display: flex; flex-direction: column; gap: 14px; }
+.plan h3 { font-size: 22px; font-weight: 800; }
+.plan .para { color: var(--muted); font-size: 15px; margin: -6px 0 0; }
+.plan .lema { font-family: var(--f-display); font-size: 18px; font-weight: 700; color: var(--gold); margin: -6px 0 0; line-height: 1.25; }
+.precio { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.precio b { font-family: var(--f-display); font-size: 46px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.precio span { color: var(--muted); font-weight: 600; }
+.con-iva { font-size: 14px; color: var(--muted); margin-top: -8px; font-variant-numeric: tabular-nums; }
+.plan ul { list-style: none; padding: 0; margin: 4px 0 0; display: grid; gap: 9px; font-size: 15px; }
+.plan li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 8px; align-items: start; }
+.plan li .ms { color: var(--ok); font-size: 20px; }
+.plan .btn { margin-top: auto; justify-content: center; }
+.plan.destacado { border: 2px solid var(--gold); box-shadow: 0 22px 44px -26px rgba(201, 161, 59, .6); }
+.sello { position: absolute; top: -13px; left: 24px; background: var(--gold); color: #1a1405; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: 99px; }
+.nota { color: var(--muted); font-size: 15px; margin-top: 18px; }
+@media (max-width: 900px) { .planes { grid-template-columns: minmax(0, 1fr); max-width: 520px; } }
+
+/* ---------- Timbres ---------- */
+.timbres { background: var(--soft); }
+.timbres .wrap { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 48px; align-items: start; }
+.tabla { overflow-x: auto; border-radius: 16px; border: 1px solid var(--line); background: var(--card); }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: 16px; }
+th, td { padding: 12px 16px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+thead th { background: var(--navy); color: #fff; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; font-weight: 700; }
+thead th small { display: block; font-weight: 500; text-transform: none; letter-spacing: 0; color: #b9c4dd; }
+tbody tr:last-child td { border-bottom: 0; }
+td.total { font-weight: 800; color: var(--ink); background: color-mix(in srgb, var(--ok) 9%, transparent); }
+td.cant { font-weight: 700; }
+@media (max-width: 900px) { .timbres .wrap { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- Descargas y manual ---------- */
+.descargas .grid2 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 40px; }
+.caja { border: 1px solid var(--line); border-radius: 18px; padding: 26px; background: var(--card); display: flex; flex-direction: column; gap: 12px; }
+.caja .ms.grande { font-size: 40px; color: var(--gold); }
+.caja h3 { font-size: 21px; font-weight: 700; }
+.caja p { margin: 0; color: var(--muted); font-size: 15px; }
+.caja .btn { margin-top: auto; align-self: start; }
+.caja.manual { background: var(--navy); border-color: var(--navy); color: #fff; }
+.caja.manual p { color: #c9d3ea; }
+.caja.manual .ms.grande { color: var(--gold-2); }
+@media (max-width: 900px) { .descargas .grid2 { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- Contacto ---------- */
+.contacto { background: var(--navy); color: #fff; }
+.contacto .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center; }
+.contacto .titulo { color: #fff; }
+.contacto .lead { color: #c9d3ea; }
+.medios { display: grid; gap: 14px; }
+.medio { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; gap: 14px; align-items: center; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 16px 18px; }
+.medio .ms { font-size: 28px; color: var(--gold-2); justify-self: center; }
+.medio small { display: block; color: #9fb0d3; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; }
+.medio b { font-size: 18px; word-break: break-word; }
+.medio button, .medio a.ir { background: rgba(255,255,255,.1); color: #fff; border: 0; border-radius: 10px; padding: 9px 12px; font: 600 14px var(--f-body); cursor: pointer; text-decoration: none; }
+.medio button:hover, .medio a.ir:hover { background: rgba(255,255,255,.18); }
+@media (max-width: 900px) { .contacto .wrap { grid-template-columns: minmax(0, 1fr); } }
+footer { background: #071331; color: #8e9cbd; font-size: 14px; }
+footer .wrap { padding-block: 26px 34px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; align-items: center; }
+footer a { color: #c9d3ea; }
+</style>
+
+</head>
+<body>
+<style>body{margin:0}img{max-width:100%}</style>
+<header class="barra">
+  <div class="wrap">
+    <a class="marca" href="#inicio"><img src="img/escudo.png" alt="" width="30" height="35"><span>Stratega <b>Fiscal</b></span></a>
+    <button class="abrir" id="abrir" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span class="ms" aria-hidden="true">menu</span></button>
+    <nav class="menu" id="menu" aria-label="Secciones">
+      <a href="#servicios">Servicios</a>
+      <a href="#factura-emprende">Factura Emprende</a>
+      <a href="#precios">Precios</a>
+      <a href="#timbres">Timbres</a>
+      <a href="#descargas">Descargas</a>
+      <a href="manual/">Manual</a>
+      <a class="cta" href="#contacto">Contáctanos</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Estrategia · Cumplimiento · Crecimiento</div>
+      <h1>Tu aliado en el <em>crecimiento</em> de tu negocio</h1>
+      <p>Asesoría contable y fiscal profesional para emprendedores y pequeñas empresas. Menos impuestos, más crecimiento: llevamos tu contabilidad, te ponemos en regla ante el SAT y el IMSS y, con Factura Emprende, nuestra app, facturas y cobras desde tu celular o tu computadora.</p>
+      <div class="acciones">
+        <a class="btn btn-oro" href="#contacto" data-wa><span class="ms" aria-hidden="true">chat</span>Escríbenos</a>
+        <a class="btn btn-linea" href="#factura-emprende">Conoce Factura Emprende</a>
+      </div>
+      <ul class="datos">
+        <li><span class="ms" aria-hidden="true">verified</span>Opinión de cumplimiento positiva</li>
+        <li><span class="ms" aria-hidden="true">savings</span>Devoluciones de IVA e ISR</li>
+        <li><span class="ms" aria-hidden="true">receipt_long</span>Facturación desde tu celular</li>
+      </ul>
+    </div>
+    <div class="escena">
+      <img class="caballo" src="img/caballo.webp" alt="">
+      <div class="monitor"><img src="img/pc_01_inicio.webp" alt="Factura Emprende en la computadora: resumen de ventas del negocio"></div>
+      <div class="cel"><img src="img/91_caja.webp" alt="Factura Emprende en el celular: caja con una venta"></div>
+    </div>
+  </div>
+</section>
+
+<section class="servicios" id="servicios">
+  <div class="wrap">
+    <div class="eyebrow">Asesoría contable y fiscal</div>
+    <h2 class="titulo">Te acompañamos en todo lo fiscal</h2>
+    <p class="lead">No se trata solo de presentar declaraciones: se trata de saber qué presentar, por qué y cuándo. Tú te enfocas en hacer crecer tu negocio; nosotros nos encargamos de lo fiscal.</p>
+    <div class="grid-serv">
+      <article class="serv">
+        <div class="ico"><span class="ms" aria-hidden="true">calculate</span></div>
+        <h3>Contabilidad y declaraciones</h3>
+        <p>Llevamos tu contabilidad y presentamos tus declaraciones a tiempo, seas persona física o moral.</p><ul><li>Declaraciones mensuales y anuales</li><li>Pagos provisionales</li><li>Contabilidad electrónica</li><li>Reportes financieros</li></ul>
+      </article>
+      <article class="serv">
+        <div class="ico"><span class="ms" aria-hidden="true">verified</span></div>
+        <h3>Regularización fiscal</h3>
+        <p>¿Tu opinión de cumplimiento sale negativa o dejaste una actividad sin darla de baja? Revisamos tu situación real ante el SAT y te ponemos al corriente.</p><ul><li>Revisión de tu situación actual</li><li>Actualización de obligaciones</li><li>Declaraciones pendientes</li></ul>
+      </article>
+      <article class="serv">
+        <div class="ico"><span class="ms" aria-hidden="true">savings</span></div>
+        <h3>Devoluciones de IVA e ISR</h3>
+        <p>Elaboramos y presentamos tu solicitud de devolución de saldo a favor y le damos seguimiento hasta que recibes tu dinero.</p>
+      </article>
+      <article class="serv">
+        <div class="ico"><span class="ms" aria-hidden="true">map</span></div>
+        <h3>Estímulo fiscal IVA 8 %</h3>
+        <p>Si estás en la región fronteriza norte, te ayudamos a facturar con 8 % de IVA en lugar de 16 %.</p><ul><li>Revisión de requisitos</li><li>Aviso en el portal del SAT</li><li>Implementación correcta</li></ul>
+      </article>
+      <article class="serv">
+        <div class="ico"><span class="ms" aria-hidden="true">badge</span></div>
+        <h3>Nóminas e IMSS</h3>
+        <p>Gestionamos el proceso de tu nómina y tus movimientos ante el IMSS, sin multas ni diferencias.</p><ul><li>Altas, bajas y modificaciones</li><li>SUA, SIPARE y cuotas obrero-patronales</li><li>Prima de riesgo de trabajo</li></ul>
+      </article>
+      <article class="serv">
+        <div class="ico"><span class="ms" aria-hidden="true">account_balance</span></div>
+        <h3>Trámites ante el SAT</h3>
+        <p>Te acompañamos en los trámites para que tu negocio arranque y siga en regla.</p><ul><li>Inscripción al RFC y alta de obligaciones</li><li>Cambio de domicilio fiscal</li><li>Trámite y renovación de e.firma</li><li>Aclaraciones ante el SAT</li></ul>
+      </article>
+      <article class="serv">
+        <div class="ico"><span class="ms" aria-hidden="true">trending_up</span></div>
+        <h3>Planeación y asesoría para empresas</h3>
+        <p>Te ayudamos a elegir el régimen y la estrategia que más te convienen para pagar lo justo, con control administrativo para que tu negocio crezca ordenado.</p>
+      </article>
+      <article class="serv">
+        <div class="ico"><span class="ms" aria-hidden="true">receipt_long</span></div>
+        <h3>Facturación</h3>
+        <p>Factura tú mismo con <a href="#factura-emprende">Factura Emprende</a>, nuestra app, o déjanos tu facturación.</p>
+      </article>
+      <article class="serv">
+        <div class="ico"><span class="ms" aria-hidden="true">support_agent</span></div>
+        <h3>Atención personalizada</h3>
+        <p>Analizamos cada caso de forma personal y te explicamos qué presentar, por qué y cuándo.</p>
+      </article>
+    </div>
+    <ol class="proceso" aria-label="Cómo trabajamos">
+      <li><span class="ms" aria-hidden="true">search</span><b>Análisis</b><span>Revisamos tu caso y documentación.</span></li>
+      <li><span class="ms" aria-hidden="true">folder_open</span><b>Integración</b><span>Preparamos tu expediente.</span></li>
+      <li><span class="ms" aria-hidden="true">send</span><b>Presentación</b><span>Presentamos tus trámites.</span></li>
+      <li><span class="ms" aria-hidden="true">visibility</span><b>Seguimiento</b><span>Damos seguimiento hasta la resolución.</span></li>
+      <li><span class="ms" aria-hidden="true">task_alt</span><b>Resultado</b><span>Tu negocio en regla.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="app" id="factura-emprende">
+  <div class="wrap">
+    <div class="app-top">
+      <div>
+        <div class="eyebrow">Nuestra app</div>
+        <h2 class="titulo">Factura Emprende</h2>
+        <p class="lead">Cotiza, vende, factura y cobra desde tu celular o tu computadora. Funciona sin internet y timbra tus facturas ante el SAT sin guardar tu CSD en el equipo.</p>
+      </div>
+      <div class="plataformas"><span class="chip"><span class="ms" aria-hidden="true">android</span>Android</span><span class="chip"><span class="ms" aria-hidden="true">desktop_windows</span>Windows</span></div>
+    </div>
+    <ul class="funciones">
+      <li><span class="ms" aria-hidden="true">receipt_long</span><b>Facturas CFDI 4.0</b><span>Validadas contra los catálogos del SAT y timbradas al momento. También notas de crédito y facturas en dólares.</span></li>
+      <li><span class="ms" aria-hidden="true">request_quote</span><b>Cotizaciones</b><span>En PDF, por WhatsApp o correo, y conviértelas en venta con un toque.</span></li>
+      <li><span class="ms" aria-hidden="true">payments</span><b>Cobranza</b><span>Pagos parciales, complementos de pago, recordatorios por WhatsApp y estados de cuenta.</span></li>
+      <li><span class="ms" aria-hidden="true">point_of_sale</span><b>Punto de venta</b><span>Caja con ticket, corte, factura global, promociones y monedero. Con impresora, cajón y báscula en la computadora.</span></li>
+      <li><span class="ms" aria-hidden="true">inventory_2</span><b>Inventario</b><span>Compras con XML, existencias, conteos físicos, lotes, caducidades y sucursales.</span></li>
+      <li><span class="ms" aria-hidden="true">monitoring</span><b>Reportes</b><span>Tablero del día, ventas, márgenes y el paquete del mes listo para tu contador.</span></li>
+      <li><span class="ms" aria-hidden="true">group</span><b>Varios usuarios</b><span>Cajeros con NIP y permisos, y varios equipos trabajando a la vez.</span></li>
+      <li><span class="ms" aria-hidden="true">wifi_off</span><b>Sin internet</b><span>Sigue vendiendo sin conexión; todo se respalda solo en la nube al volver.</span></li>
+    </ul>
+    <div class="galeria">
+      <figure><div class="tel"><img src="img/10_inicio.webp" alt="Pantalla de inicio con el resumen del negocio" loading="lazy"></div><figcaption>Resumen de tu negocio</figcaption></figure>
+      <figure><div class="tel"><img src="img/45_factura_timbrada.webp" alt="Factura timbrada" loading="lazy"></div><figcaption>Factura timbrada</figcaption></figure>
+      <figure><div class="tel"><img src="img/91_caja.webp" alt="Caja del punto de venta" loading="lazy"></div><figcaption>Caja de mostrador</figcaption></figure>
+      <figure><div class="tel"><img src="img/102_tablero.webp" alt="Tablero del gerente" loading="lazy"></div><figcaption>Tablero del día</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="precios" id="precios">
+  <div class="wrap">
+    <div class="eyebrow">Planes de Factura Emprende</div>
+    <h2 class="titulo">Elige el plan para tu negocio</h2>
+    <p class="lead">Pago mensual. Cada plan incluye 1 equipo (celular o computadora). Los timbres se compran aparte.</p>
+    <div class="planes">
+      <article class="plan">
+        <h3>Básico</h3>
+        <p class="lema">“Facturo lo que vendo”</p>
+        <p class="para">Todo lo fiscal, ya con complementos de pago.</p>
+        <div class="precio"><b>$500</b><span>+ IVA al mes</span></div>
+        <div class="con-iva">$540 con IVA (8 %)</div>
+        <ul>
+          <li><span class="ms" aria-hidden="true">check_circle</span>Facturas CFDI 4.0 timbradas, también en dólares</li>
+          <li><span class="ms" aria-hidden="true">check_circle</span>Registro de pagos y complementos de pago</li>
+          <li><span class="ms" aria-hidden="true">check_circle</span>Notas de crédito y cancelación ante el SAT</li>
+          <li><span class="ms" aria-hidden="true">check_circle</span>Clientes y productos con claves del SAT</li>
+          <li><span class="ms" aria-hidden="true">check_circle</span>Paquete del mes para tu contador</li>
+          <li><span class="ms" aria-hidden="true">check_circle</span>Respaldo en la nube</li>
+        </ul>
+        <a class="btn btn-azul" href="#contacto" data-wa="Hola, me interesa el plan Básico de Factura Emprende.">Quiero el Básico</a>
+      </article>
+      <article class="plan">
+        <h3>Pro</h3>
+        <p class="lema">“Vendo a crédito y doy seguimiento”</p>
+        <p class="para">Para cotizar, dar crédito y cobrar a tiempo.</p>
+        <div class="precio"><b>$800</b><span>+ IVA al mes</span></div>
+        <div class="con-iva">$864 con IVA (8 %)</div>
+        <ul>
+          <li><span class="ms" aria-hidden="true">check_circle</span>Todo lo del Básico</li>
+          <li><span class="ms" aria-hidden="true">check_circle</span>Cotizaciones en PDF por WhatsApp o correo</li>
+          <li><span class="ms" aria-hidden="true">check_circle</span>Ventas a crédito con límite por cliente</li>
+          <li><span class="ms" aria-hidden="true">check_circle</span>Estados de cuenta</li>
+          <li><span class="ms" aria-hidden="true">check_circle</span>Recordatorios de cobro por WhatsApp</li>
+        </ul>
+        <a class="btn btn-azul" href="#contacto" data-wa="Hola, me interesa el plan Pro de Factura Emprende.">Quiero el Pro</a>
+      </article>
+      <article class="plan destacado">
+        <span class="sello">Todo incluido</span>
+        <h3>Premium Plus</h3>
+        <p class="lema">“Tengo mostrador y mercancía”</p>
+        <p class="para">Todo lo de la app para tu negocio.</p>
+        <div class="precio"><b>$1,000</b><span>+ IVA al mes</span></div>
+        <div class="con-iva">$1,080 con IVA (8 %)</div>
+        <ul>
+          <li><span class="ms" aria-hidden="true">check_circle</span>Todo lo del Pro</li>
+          <li><span class="ms" aria-hidden="true">check_circle</span>Inventario, compras y conteos físicos</li>
+          <li><span class="ms" aria-hidden="true">check_circle</span>Punto de venta con caja, ticket y corte</li>
+          <li><span class="ms" aria-hidden="true">check_circle</span>Cajeros con NIP y permisos</li>
+          <li><span class="ms" aria-hidden="true">check_circle</span>Sucursales y tablero del gerente</li>
+        </ul>
+        <a class="btn btn-oro" href="#contacto" data-wa="Hola, me interesa el plan Premium Plus de Factura Emprende.">Quiero el Premium Plus</a>
+      </article>
+    </div>
+    <p class="nota">¿Necesitas más de un equipo, por ejemplo una segunda caja? Pregúntanos por equipos adicionales.</p>
+  </div>
+</section>
+
+<section class="timbres" id="timbres">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Timbres</div>
+      <h2 class="titulo">Paga solo los timbres que usas</h2>
+      <p class="lead">Cada factura, nota de crédito o complemento de pago timbrado usa un timbre. Entre más compras, menos pagas por cada uno. Tu saldo siempre se ve en la pantalla de Inicio de la app.</p>
+    </div>
+    <div class="tabla">
+      <table>
+        <thead><tr><th>Timbres</th><th>Por timbre<small>sin IVA</small></th><th>Por timbre<small>con IVA (8 %)</small></th><th>Total<small>con IVA</small></th></tr></thead>
+        <tbody id="tabla-timbres"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="descargas" id="descargas">
+  <div class="wrap">
+    <div class="eyebrow">Descargas</div>
+    <h2 class="titulo">Instala Factura Emprende</h2>
+    <p class="lead">Necesitas una licencia activa para entrar. Si aún no la tienes, escríbenos.</p>
+    <div class="grid2">
+      <article class="caja">
+        <span class="ms grande" aria-hidden="true">android</span>
+        <h3>Celular Android</h3>
+        <p>Descarga el archivo APK e instálalo. Las actualizaciones llegan desde la misma app.</p>
+        <a class="btn btn-azul" id="apk" href="https://vtyuyvmmygjyqxzzrqnu.supabase.co/storage/v1/object/public/apk/factura-emprende-0.9.20-41.apk"><span class="ms" aria-hidden="true">download</span>Descargar APK <span id="apk-ver">0.9.20</span></a>
+      </article>
+      <article class="caja">
+        <span class="ms grande" aria-hidden="true">desktop_windows</span>
+        <h3>Computadora Windows</h3>
+        <p>Instalador para Windows 10 u 11 (64 bits), con caja de mostrador, impresora de tickets, cajón y báscula.</p>
+        <a class="btn btn-azul" id="win" href="#contacto" data-wa="Hola, quiero el instalador de Factura Emprende para Windows."><span class="ms" aria-hidden="true" id="win-ico">mail</span><span id="win-txt">Pedir el instalador</span></a>
+      </article>
+      <article class="caja manual">
+        <span class="ms grande" aria-hidden="true">menu_book</span>
+        <h3>Manual de usuario</h3>
+        <p>Guías paso a paso con las pantallas de la app. Exclusivo para clientes: entra con el mismo correo y contraseña de la app.</p>
+        <a class="btn btn-oro" href="manual/"><span class="ms" aria-hidden="true">lock_open</span>Entrar al manual</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="contacto" id="contacto">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Contacto</div>
+      <h2 class="titulo">Construyamos tu tranquilidad fiscal</h2>
+      <p class="lead">Escríbenos para regularizarte, pedir informes de nuestros servicios contables, contratar Factura Emprende o comprar timbres. Tu tranquilidad es nuestro compromiso.</p>
+    </div>
+    <div class="medios">
+      <div class="medio" id="medio-wa" hidden>
+        <span class="ms" aria-hidden="true">chat</span>
+        <div><small>WhatsApp</small><b id="wa-texto"></b></div>
+        <a class="ir" id="wa-ir" href="#" target="_blank" rel="noopener">Abrir</a>
+      </div>
+      <div class="medio">
+        <span class="ms" aria-hidden="true">mail</span>
+        <div><small>Correo</small><b id="correo">manuel.stratega@gmail.com</b></div>
+        <button type="button" id="copiar">Copiar</button>
+      </div>
+      <div class="medio">
+        <span class="ms" aria-hidden="true">location_on</span>
+        <div><small>Atendemos en</small><b>Baja California</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="anio">2026</span> Stratega Fiscal · <em>Estrategia hoy, tranquilidad siempre.</em></span>
+    <span>Precios en pesos mexicanos · <a href="manual/">Manual de Factura Emprende</a></span>
+  </div>
+</footer>
+
+<script>
+/* Escribe aquí tu número de WhatsApp a 10 dígitos (por ejemplo "6161234567"). Vacío = los botones llevan a Contacto. */
+const WHATSAPP = "6161595842";
+
+const TIMBRES = [
+  [50, 2.50, 2.70, 135], [100, 2.40, 2.592, 259], [200, 2.30, 2.484, 497], [300, 2.20, 2.376, 713],
+  [400, 2.10, 2.268, 907], [500, 2.00, 2.16, 1080], [1000, 1.90, 2.052, 2052], [5000, 1.80, 1.944, 9720], [10000, 1.70, 1.836, 18360],
+];
+const mx = (n, d) => n.toLocaleString("es-MX", { minimumFractionDigits: d, maximumFractionDigits: d });
+document.getElementById("tabla-timbres").innerHTML = TIMBRES.map(([c, s, i, t]) =>
+  `<tr><td class="cant">${mx(c, 0)}</td><td>$${mx(s, 2)}</td><td>$${i.toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 3 })}</td><td class="total">$${mx(t, 0)}</td></tr>`).join("");
+
+if (WHATSAPP) {
+  const base = "https://wa.me/52" + WHATSAPP;
+  document.querySelectorAll("[data-wa]").forEach(a => {
+    const msg = a.getAttribute("data-wa") || "Hola, quiero informes de Stratega Fiscal.";
+    a.href = base + "?text=" + encodeURIComponent(msg);
+    a.target = "_blank"; a.rel = "noopener";
+  });
+  document.getElementById("medio-wa").hidden = false;
+  document.getElementById("wa-texto").textContent = WHATSAPP.replace(/(\d{3})(\d{3})(\d{4})/, "$1 $2 $3");
+  document.getElementById("wa-ir").href = base;
+}
+
+document.getElementById("copiar").addEventListener("click", e => {
+  const b = e.currentTarget, t = document.getElementById("correo").textContent;
+  const listo = () => { b.textContent = "Copiado"; setTimeout(() => (b.textContent = "Copiar"), 1800); };
+  const marcar = () => { const r = document.createRange(); r.selectNodeContents(document.getElementById("correo")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+  try { navigator.clipboard.writeText(t).then(listo, marcar); } catch { marcar(); }
+});
+
+const boton = document.getElementById("abrir"), menu = document.getElementById("menu");
+boton.addEventListener("click", () => { const a = menu.classList.toggle("abierto"); boton.setAttribute("aria-expanded", a); });
+menu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => { menu.classList.remove("abierto"); boton.setAttribute("aria-expanded", false); }));
+document.getElementById("anio").textContent = new Date().getFullYear();
+
+/* Descargas: toma de Supabase la última versión publicada (la misma que avisa la app).
+   Si no hay conexión, se quedan los enlaces escritos arriba. */
+(async () => {
+  const api = "https://vtyuyvmmygjyqxzzrqnu.supabase.co/rest/v1/versiones_app";
+  const llave = "sb_publishable_2bXYTt-KabmY0TS83zjitw__ImK8EmY";
+  const leer = async q => {
+    try {
+      const r = await fetch(`${api}?${q}`, { headers: { apikey: llave } });
+      return r.ok ? (await r.json())[0] : null;
+    } catch { return null; }
+  };
+  const apk = await leer("select=version,url&url=not.is.null&order=version_code.desc&limit=1");
+  if (apk) {
+    document.getElementById("apk").href = apk.url;
+    document.getElementById("apk-ver").textContent = apk.version;
+  }
+  const win = await leer("select=version,url_windows&url_windows=not.is.null&order=version_code.desc&limit=1");
+  if (win) {
+    const a = document.getElementById("win");
+    a.href = win.url_windows; a.removeAttribute("target"); a.removeAttribute("data-wa");
+    document.getElementById("win-ico").textContent = "download";
+    document.getElementById("win-txt").textContent = "Descargar para Windows " + win.version;
+  }
+})();
+</script>
+
+</body>
+</html>
