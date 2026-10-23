@@ -2,30 +2,42 @@
 bella.ns.cloudflare.com.
 jose.ns.cloudflare.com.
 == A (1.1.1.1)
+185.199.108.153
+185.199.110.153
+185.199.111.153
+185.199.109.153
 == A (8.8.8.8)
 == WWW
-;; communications error to 1.1.1.1#53: timed out
+manuelfb0723.github.io.
+185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
 == WHOIS NS (.mx)
 c.mx-ns.mx.
 e.mx-ns.mx.
 == Delegación
-.			505446	IN	NS	g.root-servers.net.
-.			505446	IN	NS	b.root-servers.net.
-.			505446	IN	NS	j.root-servers.net.
-mx.			172800	IN	NS	e.mx-ns.mx.
 mx.			172800	IN	NS	c.mx-ns.mx.
-mx.			172800	IN	NS	x.mx-ns.mx.
-mx.			172800	IN	NS	o.mx-ns.mx.
 mx.			172800	IN	NS	i.mx-ns.mx.
+mx.			172800	IN	NS	o.mx-ns.mx.
+mx.			172800	IN	NS	e.mx-ns.mx.
+mx.			172800	IN	NS	x.mx-ns.mx.
 mx.			172800	IN	NS	m.mx-ns.mx.
 strategafiscal.com.mx.	86400	IN	NS	jose.ns.cloudflare.com.
 strategafiscal.com.mx.	86400	IN	NS	bella.ns.cloudflare.com.
-strategafiscal.com.mx.	1800	IN	SOA	bella.ns.cloudflare.com. dns.cloudflare.com. 2418272061 10000 2400 604800 1800
+strategafiscal.com.mx.	3600	IN	A	185.199.108.153
+strategafiscal.com.mx.	3600	IN	A	185.199.111.153
+strategafiscal.com.mx.	3600	IN	A	185.199.110.153
+strategafiscal.com.mx.	3600	IN	A	185.199.109.153
 == HTTP
-curl: (6) Could not resolve host: strategafiscal.com.mx
-000 
+200 
 == HTTPS
-curl: (6) Could not resolve host: strategafiscal.com.mx
+curl: (60) SSL: no alternative certificate subject name matches target host name 'strategafiscal.com.mx'
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
 000
 == github.io
 301 http://strategafiscal.com.mx/
