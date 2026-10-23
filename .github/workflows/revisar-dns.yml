@@ -1,0 +1,25 @@
+name: Revisar DNS
+on:
+  push:
+    branches: [revisar-dns]
+permissions:
+  contents: write
+jobs:
+  dns:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          {
+            echo "== NS"; dig +short NS strategafiscal.com.mx @1.1.1.1
+            echo "== A (1.1.1.1)"; dig +short A strategafiscal.com.mx @1.1.1.1
+            echo "== A (8.8.8.8)"; dig +short A strategafiscal.com.mx @8.8.8.8
+            echo "== WWW"; dig +short www.strategafiscal.com.mx @1.1.1.1
+            echo "== WHOIS NS (.mx)"; dig +short NS com.mx @1.1.1.1 | head -2
+            echo "== Delegación"; dig +trace +nodnssec strategafiscal.com.mx A 2>&1 | grep -E "NS|A\s" | tail -12
+            echo "== HTTP"; curl -sS -m 15 -o /dev/null -w "%{http_code} %{redirect_url}\n" http://strategafiscal.com.mx/ || true
+            echo "== HTTPS"; curl -sS -m 15 -o /dev/null -w "%{http_code}\n" https://strategafiscal.com.mx/ || true
+            echo "== github.io"; curl -sS -m 15 -o /dev/null -w "%{http_code} %{redirect_url}\n" https://manuelfb0723.github.io/strategafiscal/ || true
+          } > resultado-dns.txt 2>&1
+          git config user.name github-actions; git config user.email github-actions@users.noreply.github.com
+          git add resultado-dns.txt; git commit -m "resultado [skip ci]"; git push
