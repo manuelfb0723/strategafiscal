@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mensajes · Stratega Fiscal</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="../img/icono.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Bandeja de prospectos: lista por fecha, con chip de origen y estado; acciones a la derecha de cada tarjeta. */
+:root {
+  --navy: #0b1d45; --navy-2: #13306c; --gold: #c9a13b; --gold-2: #e5c26a;
+  --bg: #f3f5f9; --card: #ffffff; --ink: #111c33; --muted: #56627a; --line: #dbe1ec;
+  --ok: #138a4f; --ok-bg: #e3f5eb; --pend: #a36a00; --pend-bg: #fff2d6; --error: #c62828;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Figtree", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root { --bg: #0a1022; --card: #121d38; --ink: #e9edf6; --muted: #a2adc4; --line: #2a3a5f; --ok: #3cc77f; --ok-bg: #12301f; --pend: #f0b84c; --pend-bg: #33270d; --error: #ff7b7b; color-scheme: dark; } }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16px/1.5 var(--f-body); }
+button, input, select, textarea { font: inherit; }
+:focus-visible { outline: 3px solid var(--gold-2); outline-offset: 2px; border-radius: 8px; }
+header { background: var(--navy); color: #fff; }
+header .wrap { display: flex; align-items: center; gap: 12px; height: 60px; }
+header img { width: 28px; }
+header b { font: 800 18px var(--f-display); }
+header .quien { margin-left: auto; color: #b9c4dd; font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+header button { flex: none; background: rgba(255,255,255,.12); color: #fff; border: 0; border-radius: 8px; padding: 6px 10px; cursor: pointer; font-weight: 600; font-size: 13px; }
+.wrap { max-width: 980px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+main .wrap { padding-block: 28px 60px; }
+h1 { font: 800 28px/1.15 var(--f-display); margin: 0; }
+.resumen { color: var(--muted); margin: 6px 0 20px; }
+.filtros { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.filtros button { border: 1.5px solid var(--line); background: var(--card); color: var(--ink); border-radius: 99px; padding: 6px 14px; font-weight: 600; font-size: 14px; cursor: pointer; }
+.filtros button[aria-pressed="true"] { background: var(--navy-2); border-color: var(--navy-2); color: #fff; }
+.lista { display: grid; gap: 12px; }
+.pros { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 16px; }
+.pros.hecho { opacity: .7; }
+.pros .cab { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.pros h2 { font: 700 18px var(--f-body); margin: 0; }
+.chip { font-size: 12px; font-weight: 700; padding: 2px 9px; border-radius: 99px; background: var(--bg); color: var(--muted); }
+.chip.pend { background: var(--pend-bg); color: var(--pend); }
+.chip.ok { background: var(--ok-bg); color: var(--ok); }
+.fecha { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+.datos { margin: 2px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 14px; color: var(--muted); }
+.datos b { color: var(--ink); font-weight: 600; }
+.msg { grid-column: 1 / -1; margin: 4px 0 0; padding: 10px 12px; background: var(--bg); border-radius: 10px; white-space: pre-wrap; font-size: 15px; }
+.acciones { display: flex; flex-direction: column; gap: 6px; align-items: stretch; grid-row: 1 / span 2; grid-column: 2; }
+.acciones a, .acciones button { text-align: center; text-decoration: none; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); border-radius: 9px; padding: 6px 12px; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.acciones .wa { border-color: #25a560; color: #138a4f; }
+.acciones button.marcar { background: var(--navy-2); border-color: var(--navy-2); color: #fff; }
+.vacio { text-align: center; color: var(--muted); padding: 48px 16px; background: var(--card); border: 1px dashed var(--line); border-radius: 14px; }
+@media (max-width: 640px) { .pros { grid-template-columns: minmax(0, 1fr); } .acciones { grid-column: 1; grid-row: auto; flex-direction: row; flex-wrap: wrap; } }
+
+.puerta { min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; background: radial-gradient(120% 90% at 85% 10%, var(--navy-2) 0%, var(--navy) 60%); }
+.tarjeta { width: 100%; max-width: 400px; background: var(--card); border-radius: 20px; padding: 30px 26px; }
+.tarjeta h1 { font-size: 24px; margin-bottom: 6px; }
+.tarjeta p { color: var(--muted); margin: 0 0 18px; font-size: 15px; }
+.tarjeta label { display: block; font-weight: 600; font-size: 14px; margin: 12px 0 6px; }
+.tarjeta input { width: 100%; padding: 11px 13px; border: 1.5px solid var(--line); border-radius: 11px; background: transparent; color: var(--ink); }
+.tarjeta button { width: 100%; margin-top: 18px; padding: 12px; border: 0; border-radius: 11px; background: var(--navy); color: #fff; font-weight: 700; cursor: pointer; }
+.error { color: var(--error); font-size: 14px; margin: 10px 0 0; min-height: 1.2em; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+</head>
+<body>
+
+<div class="puerta" id="puerta">
+  <form class="tarjeta" id="acceso" novalidate>
+    <h1>Mensajes del sitio</h1>
+    <p>Solo para administradores de Stratega Fiscal.</p>
+    <label for="correo">Correo</label><input type="email" id="correo" autocomplete="username">
+    <label for="clave">Contraseña</label><input type="password" id="clave" autocomplete="current-password">
+    <button type="submit" id="entrar">Entrar</button>
+    <p class="error" id="error" role="alert"></p>
+  </form>
+</div>
+
+<div id="bandeja" hidden>
+  <header><div class="wrap"><img src="../img/escudo.png" alt=""><b>Mensajes</b><span class="quien" id="quien"></span><button type="button" id="salir">Cerrar sesión</button></div></header>
+  <main><div class="wrap">
+    <h1>Registros y mensajes</h1>
+    <p class="resumen" id="resumen">Cargando…</p>
+    <div class="filtros" role="group" aria-label="Filtrar">
+      <button type="button" data-f="pend" aria-pressed="true">Pendientes</button>
+      <button type="button" data-f="todos" aria-pressed="false">Todos</button>
+      <button type="button" data-f="formulario" aria-pressed="false">Registros</button>
+      <button type="button" data-f="chat" aria-pressed="false">Chat</button>
+    </div>
+    <div class="lista" id="lista"></div>
+  </div></main>
+</div>
+
+<script>
+const sb = supabase.createClient("https://vtyuyvmmygjyqxzzrqnu.supabase.co", "sb_publishable_2bXYTt-KabmY0TS83zjitw__ImK8EmY");
+const $ = id => document.getElementById(id);
+let todos = [], filtro = "pend";
+
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const fecha = f => new Date(f).toLocaleString("es-MX", { dateStyle: "medium", timeStyle: "short" });
+
+function pintar() {
+  const l = todos.filter(p => filtro === "todos" || (filtro === "pend" ? !p.atendido : p.origen === filtro));
+  const pend = todos.filter(p => !p.atendido).length;
+  $("resumen").textContent = `${todos.length} en total · ${pend} pendiente${pend === 1 ? "" : "s"} de atender`;
+  if (!l.length) { $("lista").innerHTML = `<div class="vacio">${filtro === "pend" ? "No hay mensajes pendientes." : "Aún no hay nada aquí."}</div>`; return; }
+  $("lista").innerHTML = l.map(p => {
+    const tel = p.telefono ? `52${p.telefono.slice(-10)}` : "";
+    const saludo = encodeURIComponent(`Hola ${p.nombre.split(" ")[0]}, te escribo de Stratega Fiscal por tu mensaje en nuestro sitio.`);
+    const datos = [
+      p.empresa && `<li>Empresa: <b>${esc(p.empresa)}</b></li>`,
+      p.rfc && `<li>RFC: <b>${esc(p.rfc)}</b></li>`,
+      p.puesto && `<li>Puesto: <b>${esc(p.puesto)}</b></li>`,
+      p.servicio && `<li>Interés: <b>${esc(p.servicio)}</b></li>`,
+      p.facturas_mes && `<li>Facturas al mes: <b>${esc(p.facturas_mes)}</b></li>`,
+      p.correo && `<li>Correo: <b>${esc(p.correo)}</b></li>`,
+      p.telefono && `<li>Teléfono: <b>${esc(p.telefono)}</b></li>`,
+    ].filter(Boolean).join("");
+    return `<article class="pros${p.atendido ? " hecho" : ""}">
+      <div>
+        <div class="cab"><h2>${esc(p.nombre)}</h2>
+          <span class="chip">${p.origen === "chat" ? "Chat" : "Registro"}</span>
+          <span class="chip ${p.atendido ? "ok" : "pend"}">${p.atendido ? "Atendido" : "Pendiente"}</span>
+          <span class="fecha">${fecha(p.creado)}</span></div>
+        <ul class="datos">${datos}</ul>
+      </div>
+      <div class="acciones">
+        ${tel ? `<a class="wa" href="https://wa.me/${tel}?text=${saludo}" target="_blank" rel="noopener">WhatsApp</a>` : ""}
+        ${p.correo ? `<a href="mailto:${esc(p.correo)}?subject=${encodeURIComponent("Stratega Fiscal")}">Correo</a>` : ""}
+        <button type="button" class="${p.atendido ? "" : "marcar"}" data-id="${p.id}" data-a="${p.atendido ? 0 : 1}">${p.atendido ? "Marcar pendiente" : "Marcar atendido"}</button>
+      </div>
+      ${p.mensaje ? `<p class="msg">${esc(p.mensaje)}</p>` : ""}
+    </article>`;
+  }).join("");
+}
+
+async function cargar() {
+  const { data, error } = await sb.from("prospectos").select("*").order("creado", { ascending: false }).limit(500);
+  if (error) { $("resumen").textContent = "No se pudieron cargar los mensajes. Revisa tu conexión."; return; }
+  todos = data; pintar();
+}
+
+async function mostrar(sesion) {
+  const admin = (await sb.rpc("es_admin")).data === true;
+  if (!admin) {
+    $("error").textContent = "Esta cuenta no es de administrador.";
+    await sb.auth.signOut();
+    return;
+  }
+  $("quien").textContent = sesion.user.email;
+  $("puerta").hidden = true; $("bandeja").hidden = false;
+  cargar();
+}
+
+$("acceso").addEventListener("submit", async e => {
+  e.preventDefault(); $("error").textContent = "";
+  $("entrar").disabled = true;
+  const { data, error } = await sb.auth.signInWithPassword({ email: $("correo").value.trim(), password: $("clave").value });
+  $("entrar").disabled = false;
+  if (error) { $("error").textContent = "El correo o la contraseña no son correctos."; return; }
+  mostrar(data.session);
+});
+$("salir").addEventListener("click", async () => { await sb.auth.signOut(); location.reload(); });
+document.querySelectorAll("[data-f]").forEach(b => b.addEventListener("click", () => {
+  filtro = b.dataset.f;
+  document.querySelectorAll("[data-f]").forEach(x => x.setAttribute("aria-pressed", x === b));
+  pintar();
+}));
+$("lista").addEventListener("click", async e => {
+  const b = e.target.closest("button[data-id]"); if (!b) return;
+  b.disabled = true;
+  const atendido = b.dataset.a === "1";
+  const { error } = await sb.from("prospectos").update({ atendido }).eq("id", b.dataset.id);
+  if (!error) { const p = todos.find(x => x.id === b.dataset.id); if (p) p.atendido = atendido; pintar(); }
+  else b.disabled = false;
+});
+sb.auth.getSession().then(({ data }) => { if (data.session) mostrar(data.session); });
+</script>
+</body>
+</html>

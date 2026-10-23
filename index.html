@@ -194,6 +194,71 @@ td.cant { font-weight: 700; }
 .caja.manual .ms.grande { color: var(--gold-2); }
 @media (max-width: 900px) { .descargas .grid2 { grid-template-columns: minmax(0, 1fr); } }
 
+
+.etiqueta { margin-top: auto; align-self: start; display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 99px; background: color-mix(in srgb, var(--gold) 14%, transparent); color: var(--ink); font-size: 14px; font-weight: 600; }
+.etiqueta .ms { color: var(--gold); font-size: 18px; }
+
+/* ---------- Registro ---------- */
+.registro { background: var(--soft); }
+.registro .wrap { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 48px; align-items: start; }
+.beneficios { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 14px; }
+.beneficios li { display: flex; gap: 12px; align-items: center; font-weight: 600; }
+.beneficios .ms { color: var(--gold); font-size: 24px; }
+.formulario { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 28px; display: grid; gap: 16px; box-shadow: 0 20px 44px -30px rgba(11, 29, 69, .45); }
+.dos { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+.campo { display: grid; gap: 6px; }
+.campo label { font-size: 14px; font-weight: 600; }
+label i { color: #d14343; font-style: normal; margin-left: 2px; }
+.campo input, .campo select, .campo textarea { width: 100%; padding: 11px 12px; border: 1.5px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); font: 400 16px var(--f-body); }
+.campo textarea { resize: vertical; min-height: 84px; }
+.campo input:focus, .campo select:focus, .campo textarea:focus { outline: none; border-color: var(--gold); }
+.campo .mal { border-color: #d14343; }
+.acepto { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--muted); }
+.acepto input { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--navy-2); flex: none; }
+.acepto a { color: var(--gold); font-weight: 600; }
+.pie-form { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.pie-form .btn { border: 0; cursor: pointer; }
+.pie-form .btn[disabled] { opacity: .6; cursor: wait; }
+.estado { margin: 0; font-size: 15px; font-weight: 600; }
+.estado.ok { color: var(--ok); }
+.estado.error { color: #d14343; }
+.trampa { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+@media (max-width: 900px) { .registro .wrap { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 560px) { .dos { grid-template-columns: minmax(0, 1fr); } .formulario { padding: 20px; } }
+
+/* ---------- Aviso de privacidad ---------- */
+dialog.aviso { max-width: 640px; width: calc(100% - 32px); border: 0; border-radius: 18px; padding: 28px; background: var(--card); color: var(--ink); }
+dialog.aviso::backdrop { background: rgba(5, 10, 24, .6); }
+dialog.aviso h3 { font-size: 22px; margin-bottom: 12px; }
+dialog.aviso p { color: var(--muted); font-size: 15px; margin: 0 0 12px; }
+
+/* ---------- Chat ---------- */
+.chat-boton { position: fixed; right: calc(20px + env(safe-area-inset-right, 0px)); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); z-index: 40; width: 62px; height: 62px; border-radius: 50%; border: 0; background: var(--gold-2); color: #1a1405; display: grid; place-items: center; cursor: pointer; box-shadow: 0 12px 30px -8px rgba(0,0,0,.45); }
+.chat-boton .ms { font-size: 30px; }
+.chat-boton:hover { transform: translateY(-2px); }
+section.chat { padding: 0; }
+.chat { position: fixed; right: calc(20px + env(safe-area-inset-right, 0px)); bottom: calc(96px + env(safe-area-inset-bottom, 0px)); z-index: 40; width: min(370px, calc(100vw - 40px)); max-height: min(600px, calc(100vh - 130px)); display: flex; flex-direction: column; background: var(--card); color: var(--ink); border-radius: 18px; overflow: hidden; box-shadow: 0 24px 60px -18px rgba(0,0,0,.5); border: 1px solid var(--line); }
+.chat-cab { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: var(--navy); color: #fff; }
+.chat-cab img { width: 34px; }
+.chat-cab b { display: block; font-size: 16px; }
+.chat-cab span { font-size: 13px; color: #b9c4dd; }
+.chat-cab button { margin-left: auto; background: none; border: 0; color: #fff; cursor: pointer; padding: 4px; }
+.chat-cuerpo { flex: 1; min-height: 0; padding: 16px; overflow-y: auto; display: grid; gap: 12px; align-content: start; }
+.burbuja { background: var(--soft); border-radius: 14px 14px 14px 4px; padding: 10px 14px; font-size: 15px; max-width: 90%; }
+.burbuja.mia { justify-self: end; background: var(--navy-2); color: #fff; border-radius: 14px 14px 4px 14px; }
+.rapidas { display: flex; flex-wrap: wrap; gap: 8px; }
+.rapidas button { border: 1.5px solid var(--line); background: var(--bg); color: var(--ink); border-radius: 99px; padding: 6px 12px; font: 600 13px var(--f-body); cursor: pointer; }
+.rapidas button:hover { border-color: var(--gold); }
+.chat-form { display: grid; gap: 8px; padding: 12px 16px 16px; border-top: 1px solid var(--line); }
+.chat-form input, .chat-form textarea { width: 100%; padding: 9px 11px; border: 1.5px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); font: 400 15px var(--f-body); }
+.chat-form textarea { resize: none; height: 64px; }
+.chat-form .acepto { font-size: 12px; }
+.chat-form .acepto input { width: 16px; height: 16px; margin-top: 1px; }
+.chat-form button[type=submit] { border: 0; border-radius: 10px; padding: 10px; background: var(--navy); color: #fff; font: 700 15px var(--f-body); cursor: pointer; }
+.chat-form button[disabled] { opacity: .6; }
+.chat-wa { font-size: 13px; color: var(--muted); text-align: center; margin: 0; }
+.chat-wa a { color: var(--gold); font-weight: 700; }
+
 /* ---------- Contacto ---------- */
 .contacto { background: var(--navy); color: #fff; }
 .contacto .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center; }
@@ -224,9 +289,8 @@ footer a { color: #c9d3ea; }
       <a href="#factura-emprende">Factura Emprende</a>
       <a href="#precios">Precios</a>
       <a href="#timbres">Timbres</a>
-      <a href="#descargas">Descargas</a>
       <a href="manual/">Manual</a>
-      <a class="cta" href="#contacto">Contáctanos</a>
+      <a class="cta" href="#registro">Regístrate</a>
     </nav>
   </div>
 </header>
@@ -421,23 +485,23 @@ footer a { color: #c9d3ea; }
   </div>
 </section>
 
-<section class="descargas" id="descargas">
+<section class="descargas" id="instalacion">
   <div class="wrap">
-    <div class="eyebrow">Descargas</div>
-    <h2 class="titulo">Instala Factura Emprende</h2>
-    <p class="lead">Necesitas una licencia activa para entrar. Si aún no la tienes, escríbenos.</p>
+    <div class="eyebrow">Instalación</div>
+    <h2 class="titulo">Disponible para celular y computadora</h2>
+    <p class="lead">Al contratar tu plan te enviamos el instalador y te ayudamos a dejarlo listo. Necesitas una licencia activa para entrar.</p>
     <div class="grid2">
       <article class="caja">
         <span class="ms grande" aria-hidden="true">android</span>
         <h3>Celular Android</h3>
-        <p>Descarga el archivo APK e instálalo. Las actualizaciones llegan desde la misma app.</p>
-        <a class="btn btn-azul" id="apk" href="https://vtyuyvmmygjyqxzzrqnu.supabase.co/storage/v1/object/public/apk/factura-emprende-0.9.20-41.apk"><span class="ms" aria-hidden="true">download</span>Descargar APK <span id="apk-ver">0.9.20</span></a>
+        <p>App para Android con todas las funciones. Muy pronto también en Google Play. Las actualizaciones llegan desde la misma app.</p>
+        <span class="etiqueta"><span class="ms" aria-hidden="true">schedule</span>Próximamente en Google Play</span>
       </article>
       <article class="caja">
         <span class="ms grande" aria-hidden="true">desktop_windows</span>
         <h3>Computadora Windows</h3>
-        <p>Instalador para Windows 10 u 11 (64 bits), con caja de mostrador, impresora de tickets, cajón y báscula.</p>
-        <a class="btn btn-azul" id="win" href="#contacto" data-wa="Hola, quiero el instalador de Factura Emprende para Windows."><span class="ms" aria-hidden="true" id="win-ico">mail</span><span id="win-txt">Pedir el instalador</span></a>
+        <p>Para Windows 10 u 11 (64 bits), con caja de mostrador, impresora de tickets, cajón de dinero y báscula.</p>
+        <span class="etiqueta"><span class="ms" aria-hidden="true">mail</span>Te enviamos el instalador</span>
       </article>
       <article class="caja manual">
         <span class="ms grande" aria-hidden="true">menu_book</span>
@@ -446,6 +510,54 @@ footer a { color: #c9d3ea; }
         <a class="btn btn-oro" href="manual/"><span class="ms" aria-hidden="true">lock_open</span>Entrar al manual</a>
       </article>
     </div>
+  </div>
+</section>
+
+<section class="registro" id="registro">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Regístrate</div>
+      <h2 class="titulo">Prepárate para tener tus impuestos en orden</h2>
+      <p class="lead">Si te interesa alguno de nuestros servicios o Factura Emprende, déjanos tus datos y pronto nos comunicamos contigo.</p>
+      <ul class="beneficios">
+        <li><span class="ms" aria-hidden="true">schedule</span>Te contactamos para entender tu caso.</li>
+        <li><span class="ms" aria-hidden="true">request_quote</span>Te decimos el costo antes de empezar.</li>
+        <li><span class="ms" aria-hidden="true">lock</span>Tus datos solo se usan para responderte.</li>
+      </ul>
+    </div>
+    <form class="formulario" id="form-registro" novalidate>
+      <div class="dos">
+        <div class="campo"><label for="f-nombre">Nombre completo<i>*</i></label><input id="f-nombre" name="nombre" autocomplete="name" required maxlength="120"></div>
+        <div class="campo"><label for="f-empresa">Empresa o nombre comercial</label><input id="f-empresa" name="empresa" autocomplete="organization" maxlength="160"></div>
+      </div>
+      <div class="dos">
+        <div class="campo"><label for="f-rfc">RFC</label><input id="f-rfc" name="rfc" maxlength="13" autocapitalize="characters" placeholder="Opcional"></div>
+        <div class="campo"><label for="f-puesto">Puesto</label>
+          <select id="f-puesto" name="puesto"><option value="">Selecciona</option><option>Dueño(a) del negocio</option><option>Contador(a)</option><option>Administrador(a)</option><option>Encargado(a) de ventas</option><option>Persona física / independiente</option><option>Otro</option></select></div>
+      </div>
+      <div class="dos">
+        <div class="campo"><label for="f-correo">Correo electrónico<i>*</i></label><input id="f-correo" name="correo" type="email" autocomplete="email" required maxlength="160"></div>
+        <div class="campo"><label for="f-tel">WhatsApp o teléfono<i>*</i></label><input id="f-tel" name="telefono" type="tel" autocomplete="tel" required maxlength="20" placeholder="10 dígitos"></div>
+      </div>
+      <div class="dos">
+        <div class="campo"><label for="f-servicio">Servicio de interés<i>*</i></label>
+          <select id="f-servicio" name="servicio" required>
+            <option value="">Selecciona</option>
+            <optgroup label="Factura Emprende"><option>Factura Emprende · plan Básico</option><option>Factura Emprende · plan Pro</option><option>Factura Emprende · plan Premium Plus</option><option>Compra de timbres</option></optgroup>
+            <optgroup label="Despacho"><option>Contabilidad y declaraciones</option><option>Regularización fiscal</option><option>Devolución de IVA o ISR</option><option>Estímulo fiscal IVA 8 %</option><option>Nóminas e IMSS</option><option>Trámites ante el SAT</option><option>Planeación fiscal</option></optgroup>
+            <option>Otro</option>
+          </select></div>
+        <div class="campo"><label for="f-facturas">¿Cuántas facturas emites al mes?</label>
+          <select id="f-facturas" name="facturas_mes"><option value="">Selecciona</option><option>Aún no facturo</option><option>1 a 20</option><option>21 a 50</option><option>51 a 200</option><option>201 a 500</option><option>Más de 500</option></select></div>
+      </div>
+      <div class="campo"><label for="f-mensaje">¿En qué te podemos ayudar?</label><textarea id="f-mensaje" name="mensaje" rows="3" maxlength="2000"></textarea></div>
+      <input class="trampa" name="sitio_web" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <label class="acepto"><input type="checkbox" id="f-aviso" required> <span>Acepto que Stratega Fiscal use mis datos para contactarme, según el <a href="#aviso" data-aviso>aviso de privacidad</a>.<i>*</i></span></label>
+      <div class="pie-form">
+        <button class="btn btn-oro" type="submit" id="f-enviar">Enviar</button>
+        <p class="estado" id="f-estado" role="status"></p>
+      </div>
+    </form>
   </div>
 </section>
 
@@ -483,6 +595,42 @@ footer a { color: #c9d3ea; }
   </div>
 </footer>
 
+<dialog class="aviso" id="aviso">
+  <h3>Aviso de privacidad simplificado</h3>
+  <p><b>Manuel Flores Bojórquez (Stratega Fiscal)</b> es responsable de los datos que nos das en este sitio: nombre, empresa, RFC, puesto, correo, teléfono y tu mensaje.</p>
+  <p>Los usamos solo para responderte, darte información de nuestros servicios y de Factura Emprende, y darte seguimiento si nos contratas. No los vendemos ni los compartimos con terceros para fines comerciales.</p>
+  <p>Puedes pedir en cualquier momento ver, corregir o borrar tus datos, u oponerte a su uso, escribiendo a <b>manuel.stratega@gmail.com</b>.</p>
+  <form method="dialog"><button class="btn btn-azul" type="submit">Entendido</button></form>
+</dialog>
+
+<button class="chat-boton" id="chat-boton" type="button" aria-label="Abrir el chat" aria-expanded="false" aria-controls="chat"><span class="ms" aria-hidden="true">forum</span></button>
+<section class="chat" id="chat" aria-label="Chat con Stratega Fiscal" hidden>
+  <div class="chat-cab">
+    <img src="img/escudo.png" alt="">
+    <div><b>Stratega Fiscal</b><span>Déjanos tu mensaje y te respondemos</span></div>
+    <button type="button" id="chat-cerrar" aria-label="Cerrar el chat"><span class="ms" aria-hidden="true">close</span></button>
+  </div>
+  <div class="chat-cuerpo" id="chat-cuerpo">
+    <div class="burbuja">¡Hola! ¿En qué te podemos ayudar? Elige un tema o escríbenos tu duda.</div>
+    <div class="rapidas" id="chat-rapidas">
+      <button type="button">Quiero Factura Emprende</button>
+      <button type="button">Necesito regularizarme</button>
+      <button type="button">Comprar timbres</button>
+      <button type="button">Contabilidad y declaraciones</button>
+      <button type="button">Devolución de IVA</button>
+    </div>
+  </div>
+  <form class="chat-form" id="chat-form" novalidate>
+    <textarea id="c-mensaje" placeholder="Escribe tu mensaje" maxlength="2000" aria-label="Mensaje"></textarea>
+    <input id="c-nombre" placeholder="Tu nombre" maxlength="120" autocomplete="name" aria-label="Tu nombre">
+    <input id="c-contacto" placeholder="Tu WhatsApp o correo" maxlength="160" autocomplete="email" aria-label="Tu WhatsApp o correo">
+    <input class="trampa" id="c-trampa" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <label class="acepto"><input type="checkbox" id="c-aviso"> <span>Acepto el <a href="#aviso" data-aviso>aviso de privacidad</a>.</span></label>
+    <button type="submit" id="c-enviar">Enviar mensaje</button>
+    <p class="chat-wa">¿Urgente? <a href="#contacto" data-wa="Hola, tengo una duda.">Escríbenos por WhatsApp</a></p>
+  </form>
+</section>
+
 <script>
 /* Escribe aquí tu número de WhatsApp a 10 dígitos (por ejemplo "6161234567"). Vacío = los botones llevan a Contacto. */
 const WHATSAPP = "6161595842";
@@ -519,30 +667,104 @@ boton.addEventListener("click", () => { const a = menu.classList.toggle("abierto
 menu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => { menu.classList.remove("abierto"); boton.setAttribute("aria-expanded", false); }));
 document.getElementById("anio").textContent = new Date().getFullYear();
 
-/* Descargas: toma de Supabase la última versión publicada (la misma que avisa la app).
-   Si no hay conexión, se quedan los enlaces escritos arriba. */
-(async () => {
-  const api = "https://vtyuyvmmygjyqxzzrqnu.supabase.co/rest/v1/versiones_app";
-  const llave = "sb_publishable_2bXYTt-KabmY0TS83zjitw__ImK8EmY";
-  const leer = async q => {
-    try {
-      const r = await fetch(`${api}?${q}`, { headers: { apikey: llave } });
-      return r.ok ? (await r.json())[0] : null;
-    } catch { return null; }
-  };
-  const apk = await leer("select=version,url&url=not.is.null&order=version_code.desc&limit=1");
-  if (apk) {
-    document.getElementById("apk").href = apk.url;
-    document.getElementById("apk-ver").textContent = apk.version;
+/* Registro y chat: se guardan en Supabase (tabla prospectos). Solo los
+   administradores los leen, en /mensajes. */
+const PROSPECTOS = "https://vtyuyvmmygjyqxzzrqnu.supabase.co/rest/v1/prospectos";
+const LLAVE = "sb_publishable_2bXYTt-KabmY0TS83zjitw__ImK8EmY";
+async function guardarProspecto(datos) {
+  const r = await fetch(PROSPECTOS, {
+    method: "POST",
+    headers: { apikey: LLAVE, "Content-Type": "application/json", Prefer: "return=minimal" },
+    body: JSON.stringify({ ...datos, acepto_aviso: true }),
+  });
+  if (!r.ok) throw new Error(await r.text());
+}
+const correoValido = c => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c);
+const soloDigitos = t => t.replace(/\D/g, "");
+
+const aviso = document.getElementById("aviso");
+document.querySelectorAll("[data-aviso]").forEach(a => a.addEventListener("click", e => {
+  e.preventDefault();
+  if (aviso.showModal) aviso.showModal(); else aviso.setAttribute("open", "");
+}));
+
+const form = document.getElementById("form-registro");
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+  const v = id => document.getElementById(id).value.trim();
+  const estado = document.getElementById("f-estado");
+  estado.className = "estado"; estado.textContent = "";
+  form.querySelectorAll(".mal").forEach(x => x.classList.remove("mal"));
+  const faltan = [];
+  if (v("f-nombre").length < 2) faltan.push("f-nombre");
+  if (!correoValido(v("f-correo"))) faltan.push("f-correo");
+  if (soloDigitos(v("f-tel")).length < 10) faltan.push("f-tel");
+  if (!v("f-servicio")) faltan.push("f-servicio");
+  if (faltan.length) {
+    faltan.forEach(id => document.getElementById(id).classList.add("mal"));
+    document.getElementById(faltan[0]).focus();
+    estado.className = "estado error"; estado.textContent = "Revisa los campos marcados en rojo.";
+    return;
   }
-  const win = await leer("select=version,url_windows&url_windows=not.is.null&order=version_code.desc&limit=1");
-  if (win) {
-    const a = document.getElementById("win");
-    a.href = win.url_windows; a.removeAttribute("target"); a.removeAttribute("data-wa");
-    document.getElementById("win-ico").textContent = "download";
-    document.getElementById("win-txt").textContent = "Descargar para Windows " + win.version;
+  if (!document.getElementById("f-aviso").checked) {
+    estado.className = "estado error"; estado.textContent = "Acepta el aviso de privacidad para enviar.";
+    return;
   }
-})();
+  const boton = document.getElementById("f-enviar");
+  boton.disabled = true; boton.textContent = "Enviando…";
+  try {
+    if (!form.sitio_web.value) {
+      await guardarProspecto({
+        origen: "formulario", nombre: v("f-nombre"), empresa: v("f-empresa"), rfc: v("f-rfc").toUpperCase(),
+        puesto: v("f-puesto"), correo: v("f-correo"), telefono: soloDigitos(v("f-tel")),
+        servicio: v("f-servicio"), facturas_mes: v("f-facturas"), mensaje: v("f-mensaje"),
+      });
+    }
+    form.reset();
+    estado.className = "estado ok"; estado.textContent = "¡Listo! Recibimos tus datos y pronto nos comunicamos contigo.";
+  } catch {
+    estado.className = "estado error"; estado.textContent = "No se pudo enviar. Revisa tu internet o escríbenos por WhatsApp.";
+  } finally {
+    boton.disabled = false; boton.textContent = "Enviar";
+  }
+});
+
+const chat = document.getElementById("chat"), chatBoton = document.getElementById("chat-boton");
+const abrirChat = si => { chat.hidden = !si; chatBoton.setAttribute("aria-expanded", si); if (si) document.getElementById("c-mensaje").focus(); };
+chatBoton.addEventListener("click", () => abrirChat(chat.hidden));
+document.getElementById("chat-cerrar").addEventListener("click", () => abrirChat(false));
+document.querySelectorAll("#chat-rapidas button").forEach(b => b.addEventListener("click", () => {
+  const m = document.getElementById("c-mensaje");
+  m.value = b.textContent + (m.value ? ". " + m.value : ""); m.focus();
+}));
+const burbuja = (texto, mia) => {
+  const d = document.createElement("div"); d.className = "burbuja" + (mia ? " mia" : ""); d.textContent = texto;
+  const c = document.getElementById("chat-cuerpo"); c.appendChild(d); c.scrollTop = c.scrollHeight;
+};
+document.getElementById("chat-form").addEventListener("submit", async e => {
+  e.preventDefault();
+  const v = id => document.getElementById(id).value.trim();
+  const mensaje = v("c-mensaje"), nombre = v("c-nombre"), contacto = v("c-contacto");
+  const esCorreo = contacto.includes("@");
+  if (!mensaje) { burbuja("Escribe tu mensaje para poder ayudarte."); return; }
+  if (nombre.length < 2) { burbuja("¿Cómo te llamas? Escribe tu nombre."); return; }
+  if (esCorreo ? !correoValido(contacto) : soloDigitos(contacto).length < 10) { burbuja("Déjanos tu WhatsApp (10 dígitos) o tu correo para responderte."); return; }
+  if (!document.getElementById("c-aviso").checked) { burbuja("Acepta el aviso de privacidad para enviar tu mensaje."); return; }
+  const boton = document.getElementById("c-enviar"); boton.disabled = true;
+  try {
+    if (!v("c-trampa")) {
+      await guardarProspecto({ origen: "chat", nombre, mensaje, correo: esCorreo ? contacto : "", telefono: esCorreo ? "" : soloDigitos(contacto) });
+    }
+    burbuja(mensaje, true);
+    burbuja(`¡Gracias, ${nombre.split(" ")[0]}! Recibimos tu mensaje y te respondemos por ${esCorreo ? "correo" : "WhatsApp"} lo antes posible.`);
+    document.getElementById("c-mensaje").value = "";
+    document.getElementById("chat-rapidas").hidden = true;
+  } catch {
+    burbuja("No se pudo enviar. Revisa tu internet o escríbenos por WhatsApp.");
+  } finally { boton.disabled = false; }
+});
+
+
 </script>
 
 </body>
