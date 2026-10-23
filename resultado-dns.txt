@@ -1,0 +1,31 @@
+== NS
+bella.ns.cloudflare.com.
+jose.ns.cloudflare.com.
+== A (1.1.1.1)
+== A (8.8.8.8)
+== WWW
+;; communications error to 1.1.1.1#53: timed out
+== WHOIS NS (.mx)
+c.mx-ns.mx.
+e.mx-ns.mx.
+== Delegación
+.			505446	IN	NS	g.root-servers.net.
+.			505446	IN	NS	b.root-servers.net.
+.			505446	IN	NS	j.root-servers.net.
+mx.			172800	IN	NS	e.mx-ns.mx.
+mx.			172800	IN	NS	c.mx-ns.mx.
+mx.			172800	IN	NS	x.mx-ns.mx.
+mx.			172800	IN	NS	o.mx-ns.mx.
+mx.			172800	IN	NS	i.mx-ns.mx.
+mx.			172800	IN	NS	m.mx-ns.mx.
+strategafiscal.com.mx.	86400	IN	NS	jose.ns.cloudflare.com.
+strategafiscal.com.mx.	86400	IN	NS	bella.ns.cloudflare.com.
+strategafiscal.com.mx.	1800	IN	SOA	bella.ns.cloudflare.com. dns.cloudflare.com. 2418272061 10000 2400 604800 1800
+== HTTP
+curl: (6) Could not resolve host: strategafiscal.com.mx
+000 
+== HTTPS
+curl: (6) Could not resolve host: strategafiscal.com.mx
+000
+== github.io
+301 http://strategafiscal.com.mx/
