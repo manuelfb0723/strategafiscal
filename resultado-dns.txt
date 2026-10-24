@@ -4,41 +4,41 @@ jose.ns.cloudflare.com.
 == A (1.1.1.1)
 185.199.111.153
 185.199.109.153
+185.199.108.153
 185.199.110.153
-185.199.108.153
 == A (8.8.8.8)
-185.199.109.153
 185.199.108.153
+185.199.109.153
 185.199.110.153
 185.199.111.153
 == WWW
 manuelfb0723.github.io.
-185.199.109.153
 185.199.108.153
-185.199.111.153
+185.199.109.153
 185.199.110.153
+185.199.111.153
 == WHOIS NS (.mx)
 c.mx-ns.mx.
 e.mx-ns.mx.
 == Delegación
 mx.			172800	IN	NS	x.mx-ns.mx.
-mx.			172800	IN	NS	e.mx-ns.mx.
 mx.			172800	IN	NS	c.mx-ns.mx.
-mx.			172800	IN	NS	i.mx-ns.mx.
 mx.			172800	IN	NS	m.mx-ns.mx.
+mx.			172800	IN	NS	e.mx-ns.mx.
+mx.			172800	IN	NS	i.mx-ns.mx.
 mx.			172800	IN	NS	o.mx-ns.mx.
 strategafiscal.com.mx.	86400	IN	NS	jose.ns.cloudflare.com.
 strategafiscal.com.mx.	86400	IN	NS	bella.ns.cloudflare.com.
-strategafiscal.com.mx.	3600	IN	A	185.199.111.153
-strategafiscal.com.mx.	3600	IN	A	185.199.110.153
 strategafiscal.com.mx.	3600	IN	A	185.199.109.153
 strategafiscal.com.mx.	3600	IN	A	185.199.108.153
+strategafiscal.com.mx.	3600	IN	A	185.199.110.153
+strategafiscal.com.mx.	3600	IN	A	185.199.111.153
 == HTTP
 200 
 == HTTPS
 200
 == privacidad https
-404 0
+200 0
 == certificado
 subject=CN = strategafiscal.com.mx
 issuer=C = US, O = Let's Encrypt, CN = YR2
