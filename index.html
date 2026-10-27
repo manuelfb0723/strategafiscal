@@ -130,7 +130,14 @@ nav.menu a.cta { background: var(--gold-2); color: #1a1405; margin-left: 6px; }
 
 /* ---------- App ---------- */
 .app { background: var(--soft); }
-.app-top { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: end; }
+.app-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 320px); gap: 48px; align-items: center; }
+.app-top .plataformas { margin-top: 24px; }
+.ver-video { display: flex; align-items: center; gap: 8px; margin: 22px 0 0; font-weight: 600; color: var(--ink); }
+.ver-video .ms { color: var(--gold); font-size: 26px; }
+.video-app { margin: 0; display: grid; gap: 10px; justify-items: center; }
+.tel-video { width: 100%; max-width: 300px; background: #0b111c; border-radius: 30px; padding: 9px; box-shadow: 0 26px 50px -24px rgba(11, 29, 69, .6); }
+.tel-video video { display: block; width: 100%; height: auto; aspect-ratio: 1080 / 1920; border-radius: 22px; background: #0b1d45; }
+.video-app figcaption { font-size: 14px; color: var(--muted); }
 .plataformas { display: flex; gap: 8px; flex-wrap: wrap; }
 .chip { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 99px; background: var(--card); border: 1px solid var(--line); font-size: 14px; font-weight: 600; }
 .chip .ms { font-size: 18px; color: var(--gold); }
@@ -389,8 +396,18 @@ footer a { color: #c9d3ea; }
         <div class="eyebrow">Nuestra app</div>
         <h2 class="titulo">Factura Emprende</h2>
         <p class="lead">Cotiza, vende, factura y cobra desde tu celular o tu computadora. Funciona sin internet y timbra tus facturas ante el SAT sin guardar tu CSD en el equipo.</p>
+        <div class="plataformas"><span class="chip"><span class="ms" aria-hidden="true">android</span>Android</span><span class="chip"><span class="ms" aria-hidden="true">desktop_windows</span>Windows</span><span class="chip"><span class="ms" aria-hidden="true">wifi_off</span>Funciona sin internet</span></div>
+        <p class="ver-video"><span class="ms" aria-hidden="true">play_circle</span>Mira en 45 segundos todo lo que puedes hacer con la app.</p>
       </div>
-      <div class="plataformas"><span class="chip"><span class="ms" aria-hidden="true">android</span>Android</span><span class="chip"><span class="ms" aria-hidden="true">desktop_windows</span>Windows</span></div>
+      <figure class="video-app">
+        <div class="tel-video">
+          <video controls playsinline preload="metadata" poster="video/portada.jpg" width="1080" height="1920" aria-label="Video promocional de Factura Emprende">
+            <source src="video/factura-emprende.mp4" type="video/mp4">
+            Tu navegador no puede reproducir el video.
+          </video>
+        </div>
+        <figcaption>Factura Emprende en acción</figcaption>
+      </figure>
     </div>
     <ul class="funciones">
       <li><span class="ms" aria-hidden="true">receipt_long</span><b>Facturas CFDI 4.0</b><span>Validadas contra los catálogos del SAT y timbradas al momento. También notas de crédito y facturas en dólares.</span></li>
