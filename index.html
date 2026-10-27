@@ -576,8 +576,13 @@ footer a { color: #c9d3ea; }
       </div>
       <div class="medio">
         <span class="ms" aria-hidden="true">mail</span>
-        <div><small>Correo</small><b id="correo">manuel.stratega@gmail.com</b></div>
-        <button type="button" id="copiar">Copiar</button>
+        <div><small>Correo · informes y contrataciones</small><b id="correo">manuel.stratega@gmail.com</b></div>
+        <button type="button" data-copiar="correo">Copiar</button>
+      </div>
+      <div class="medio">
+        <span class="ms" aria-hidden="true">support_agent</span>
+        <div><small>Soporte técnico · Factura Emprende</small><b id="correo-soporte">soporte.strategafiscal@gmail.com</b></div>
+        <button type="button" data-copiar="correo-soporte">Copiar</button>
       </div>
       <div class="medio">
         <span class="ms" aria-hidden="true">location_on</span>
@@ -591,7 +596,7 @@ footer a { color: #c9d3ea; }
 <footer>
   <div class="wrap">
     <span>© <span id="anio">2026</span> Stratega Fiscal · <em>Estrategia hoy, tranquilidad siempre.</em></span>
-    <span>Precios en pesos mexicanos · <a href="manual/">Manual de Factura Emprende</a> · <a href="privacidad/">Aviso de privacidad</a></span>
+    <span>Precios en pesos mexicanos · <a href="manual/">Manual de Factura Emprende</a> · <a href="privacidad/">Aviso de privacidad</a> · Soporte: soporte.strategafiscal@gmail.com</span>
   </div>
 </footer>
 
@@ -656,12 +661,12 @@ if (WHATSAPP) {
   document.getElementById("wa-ir").href = base;
 }
 
-document.getElementById("copiar").addEventListener("click", e => {
-  const b = e.currentTarget, t = document.getElementById("correo").textContent;
+document.querySelectorAll("[data-copiar]").forEach(b => b.addEventListener("click", () => {
+  const el = document.getElementById(b.dataset.copiar), t = el.textContent;
   const listo = () => { b.textContent = "Copiado"; setTimeout(() => (b.textContent = "Copiar"), 1800); };
-  const marcar = () => { const r = document.createRange(); r.selectNodeContents(document.getElementById("correo")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+  const marcar = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
   try { navigator.clipboard.writeText(t).then(listo, marcar); } catch { marcar(); }
-});
+}));
 
 const boton = document.getElementById("abrir"), menu = document.getElementById("menu");
 boton.addEventListener("click", () => { const a = menu.classList.toggle("abierto"); boton.setAttribute("aria-expanded", a); });
