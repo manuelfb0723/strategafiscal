@@ -282,8 +282,41 @@ section.chat { padding: 0; }
 footer { background: #071331; color: #8e9cbd; font-size: 14px; }
 footer .wrap { padding-block: 26px 34px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; align-items: center; }
 footer a { color: #c9d3ea; }
-</style>
 
+/* ---------- IQ Fiscal XML ---------- */
+.iq { background: var(--bg); border-top: 1px solid var(--line); }
+.iq-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 48px; align-items: center; }
+.iq-logo { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+.iq-logo img { width: 76px; height: auto; background: #fff; border-radius: 14px; padding: 6px; border: 1px solid var(--line); }
+.iq-logo span { color: var(--muted); font-size: 15px; max-width: 26ch; line-height: 1.4; }
+.iq .titulo em { font-style: normal; color: var(--navy-2); }
+:root[data-theme="dark"] .iq .titulo em { color: var(--gold-2); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .iq .titulo em { color: var(--gold-2); } }
+.iq .plataformas { margin-top: 24px; }
+.iq .acciones { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.btn-borde { border-color: var(--navy); color: var(--ink); }
+:root[data-theme="dark"] .btn-borde { border-color: var(--gold); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn-borde { border-color: var(--gold); } }
+.pantalla { margin: 0; background: #0b111c; border-radius: 14px; padding: 8px; box-shadow: 0 26px 50px -24px rgba(11, 29, 69, .6); }
+.pantalla img { display: block; width: 100%; height: auto; aspect-ratio: 1440 / 900; border-radius: 8px; }
+.iq .grid-serv { margin-top: 52px; }
+.iq-galeria { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; margin-top: 52px; }
+.iq-galeria figure { margin: 0; display: grid; gap: 10px; }
+.iq-galeria figcaption { font-size: 14px; color: var(--muted); text-align: center; }
+.iq-galeria figcaption b { color: var(--ink); }
+.iq .proceso { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.iq-cierre { margin-top: 52px; background: var(--navy); color: #fff; border-radius: 18px; padding: 34px; display: grid; grid-template-columns: minmax(0, 1.3fr) auto; gap: 24px; align-items: center; }
+.iq-cierre h3 { font-size: clamp(24px, 3vw, 32px); font-weight: 800; }
+.iq-cierre h3 em { font-style: normal; color: var(--gold-2); }
+.iq-cierre p { margin: 8px 0 0; color: #c9d3ea; }
+.iq-cierre small { display: block; margin-top: 10px; color: #9fb0d3; font-size: 14px; text-align: center; }
+@media (max-width: 900px) {
+  .iq-top, .iq-cierre { grid-template-columns: minmax(0, 1fr); }
+  .iq-galeria { grid-template-columns: minmax(0, 1fr); }
+  .iq .proceso { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 480px) { .iq .proceso { grid-template-columns: minmax(0, 1fr); } }
+</style>
 </head>
 <body>
 <style>body{margin:0}img{max-width:100%}</style>
@@ -294,6 +327,7 @@ footer a { color: #c9d3ea; }
     <nav class="menu" id="menu" aria-label="Secciones">
       <a href="#servicios">Servicios</a>
       <a href="#factura-emprende">Factura Emprende</a>
+      <a href="#iq-fiscal-xml">IQ Fiscal XML</a>
       <a href="#precios">Precios</a>
       <a href="#timbres">Timbres</a>
       <a href="manual/">Manual</a>
@@ -424,6 +458,101 @@ footer a { color: #c9d3ea; }
       <figure><div class="tel"><img src="img/45_factura_timbrada.webp" alt="Factura timbrada" loading="lazy"></div><figcaption>Factura timbrada</figcaption></figure>
       <figure><div class="tel"><img src="img/91_caja.webp" alt="Caja del punto de venta" loading="lazy"></div><figcaption>Caja de mostrador</figcaption></figure>
       <figure><div class="tel"><img src="img/102_tablero.webp" alt="Tablero del gerente" loading="lazy"></div><figcaption>Tablero del día</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="iq" id="iq-fiscal-xml">
+  <div class="wrap">
+    <div class="iq-top">
+      <div>
+        <div class="iq-logo"><img src="img/iq_logo.webp" alt="IQ Fiscal XML" width="229" height="240"><span>Nueva aplicación de escritorio de Stratega Fiscal</span></div>
+        <div class="eyebrow">Descarga · Revisión · Control</div>
+        <h2 class="titulo">Todos tus XML del SAT, <em>revisados</em> en minutos</h2>
+        <p class="lead">IQ Fiscal XML descarga de forma masiva los CFDI emitidos y recibidos de tus RFC directo del SAT y te dice qué revisar: facturas PPD sin complemento, gastos en efectivo, cancelados e impuestos del periodo. Todo se guarda en tu computadora.</p>
+        <div class="plataformas"><span class="chip"><span class="ms" aria-hidden="true">desktop_windows</span>Windows</span><span class="chip"><span class="ms" aria-hidden="true">laptop_mac</span>Mac</span><span class="chip"><span class="ms" aria-hidden="true">groups</span>RFC ilimitados</span><span class="chip"><span class="ms" aria-hidden="true">lock</span>Tu e.firma no sale de tu equipo</span></div>
+        <div class="acciones">
+          <a class="btn btn-azul" href="#iq-planes"><span class="ms" aria-hidden="true">sell</span>Ver licencias</a>
+          <a class="btn btn-borde" href="#registro" data-servicio="IQ Fiscal XML · prueba gratis"><span class="ms" aria-hidden="true">redeem</span>Solicita tu prueba gratis</a>
+        </div>
+      </div>
+      <figure class="pantalla"><img src="img/iq_revision.webp" alt="IQ Fiscal XML: panel de revisión con ingresos, gastos, saldos PPD y alertas" width="1440" height="900"></figure>
+    </div>
+    <div class="grid-serv">
+      <article class="serv"><span class="ico"><span class="ms" aria-hidden="true">cloud_download</span></span><h3>Descarga masiva del SAT</h3><p>Emitidos y recibidos, XML o metadata, por periodo. Divide por mes en automático y, con la descarga diaria, cada mañana tienes lo del día anterior.</p></article>
+      <article class="serv"><span class="ico"><span class="ms" aria-hidden="true">fact_check</span></span><h3>Panel de revisión</h3><p>Ingresos, gastos, IVA, saldos PPD por cobrar y por pagar, gráficas por mes y alertas prioritarias por RFC y periodo.</p></article>
+      <article class="serv"><span class="ico"><span class="ms" aria-hidden="true">receipt_long</span></span><h3>Conciliación PPD</h3><p>Cruza cada factura PPD con sus complementos de pago y detecta las que no tienen complemento o tienen saldo pendiente.</p></article>
+      <article class="serv"><span class="ico"><span class="ms" aria-hidden="true">table_view</span></span><h3>Pagos con su PPD en Excel</h3><p>Un renglón por factura pagada, con el complemento de pago y la factura PPD lado a lado, listo para tu papel de trabajo.</p></article>
+      <article class="serv"><span class="ico"><span class="ms" aria-hidden="true">account_balance</span></span><h3>Tablero de impuestos</h3><p>IVA, ISR, IEPS e impuestos locales trasladados y retenidos, desglose por tasa (16, 8, 0 %, exento) y Excel por CFDI.</p></article>
+      <article class="serv"><span class="ico"><span class="ms" aria-hidden="true">payments</span></span><h3>Gastos en efectivo</h3><p>Identifica pagos en efectivo mayores a $2,000 MXN y combustible pagado en efectivo, que pueden no ser deducibles.</p></article>
+      <article class="serv"><span class="ico"><span class="ms" aria-hidden="true">verified</span></span><h3>Validación de estatus</h3><p>Consulta en el SAT si los comprobantes siguen vigentes o se cancelaron, con alerta de EFOS.</p></article>
+      <article class="serv"><span class="ico"><span class="ms" aria-hidden="true">inventory_2</span></span><h3>Almacén de CFDI</h3><p>Busca y filtra por RFC, fecha, tipo o estatus. Exporta a Excel o guarda los XML y PDF filtrados en una carpeta.</p></article>
+      <article class="serv"><span class="ico"><span class="ms" aria-hidden="true">picture_as_pdf</span></span><h3>Representación impresa</h3><p>Abre el detalle de cualquier CFDI con sus conceptos y pagos, y genera su PDF.</p></article>
+    </div>
+    <div class="iq-galeria">
+      <figure><div class="pantalla"><img src="img/iq_ppd.webp" alt="Conciliación de facturas PPD contra complementos de pago" width="1440" height="900" loading="lazy"></div><figcaption><b>Conciliación PPD</b> · facturas contra complementos de pago</figcaption></figure>
+      <figure><div class="pantalla"><img src="img/iq_impuestos.webp" alt="Tablero de impuestos de CFDI" width="1440" height="900" loading="lazy"></div><figcaption><b>Impuestos de CFDI</b> · IVA, ISR e IEPS del periodo</figcaption></figure>
+      <figure><div class="pantalla"><img src="img/iq_detalle.webp" alt="Detalle de un CFDI" width="1440" height="900" loading="lazy"></div><figcaption><b>Detalle del CFDI</b> · conceptos, impuestos y pagos</figcaption></figure>
+      <figure><div class="pantalla"><img src="img/iq_impresa.webp" alt="Representación impresa de un CFDI" width="1440" height="900" loading="lazy"></div><figcaption><b>Representación impresa</b> · PDF de cada comprobante</figcaption></figure>
+    </div>
+    <ol class="proceso">
+      <li><span class="ms" aria-hidden="true">redeem</span><b>Solicita tu prueba</b><span>Te enviamos el instalador para Windows o Mac.</span></li>
+      <li><span class="ms" aria-hidden="true">login</span><b>Inicia sesión</b><span>Entra con el correo de tu licencia.</span></li>
+      <li><span class="ms" aria-hidden="true">badge</span><b>Agrega tus RFC</b><span>Sube el .cer, .key y contraseña de cada e.firma.</span></li>
+      <li><span class="ms" aria-hidden="true">insights</span><b>Descarga y revisa</b><span>Pide el periodo y revisa alertas, PPD e impuestos.</span></li>
+    </ol>
+    <div id="iq-planes">
+      <div class="planes">
+        <article class="plan">
+          <h3>Prueba</h3>
+          <p class="para">Para conocer la app con tus RFC</p>
+          <div class="precio"><b>Gratis</b></div>
+          <p class="con-iva">Por tiempo limitado</p>
+          <ul>
+            <li><span class="ms" aria-hidden="true">check</span><span>Todas las funciones</span></li>
+            <li><span class="ms" aria-hidden="true">check</span><span>Soporte por correo</span></li>
+          </ul>
+          <a class="btn btn-borde" href="#registro" data-servicio="IQ Fiscal XML · prueba gratis">Solicita tu prueba gratis</a>
+        </article>
+        <article class="plan">
+          <h3>Mensual</h3>
+          <p class="para">Sin límite de RFC</p>
+          <div class="precio"><b>$500</b><span>MXN + IVA / mes</span></div>
+          <ul>
+            <li><span class="ms" aria-hidden="true">check</span><span>RFC ilimitados</span></li>
+            <li><span class="ms" aria-hidden="true">check</span><span>Descarga masiva ilimitada</span></li>
+            <li><span class="ms" aria-hidden="true">check</span><span>Revisión, PPD e impuestos</span></li>
+            <li><span class="ms" aria-hidden="true">check</span><span>Validación de estatus</span></li>
+            <li><span class="ms" aria-hidden="true">check</span><span>Actualizaciones incluidas</span></li>
+          </ul>
+          <a class="btn btn-azul" href="#registro" data-servicio="IQ Fiscal XML · licencia mensual">Quiero el mensual</a>
+        </article>
+        <article class="plan destacado">
+          <span class="sello">Mejor precio</span>
+          <h3>Anual</h3>
+          <p class="para">Sin límite de RFC</p>
+          <div class="precio"><b>$5,500</b><span>MXN + IVA / año</span></div>
+          <ul>
+            <li><span class="ms" aria-hidden="true">check</span><span>RFC ilimitados</span></li>
+            <li><span class="ms" aria-hidden="true">check</span><span>Todo lo del plan mensual</span></li>
+            <li><span class="ms" aria-hidden="true">check</span><span>Ahorras $500 MXN frente a 12 meses</span></li>
+            <li><span class="ms" aria-hidden="true">check</span><span>Soporte prioritario</span></li>
+            <li><span class="ms" aria-hidden="true">check</span><span>Actualizaciones incluidas</span></li>
+          </ul>
+          <a class="btn btn-oro" href="#registro" data-servicio="IQ Fiscal XML · licencia anual">Quiero el anual</a>
+        </article>
+      </div>
+      <p class="nota">La licencia se activa con tu correo. Funciona sin internet hasta 7 días entre revisiones.</p>
+    </div>
+    <div class="iq-cierre">
+      <div>
+        <h3>Solicita tu <em>prueba gratis</em></h3>
+        <p>Déjanos tus datos y te enviamos el instalador de IQ Fiscal XML con tu licencia de prueba. Te ayudamos a instalarla y a dar de alta tus RFC.</p>
+      </div>
+      <div>
+        <a class="btn btn-oro" href="#registro" data-servicio="IQ Fiscal XML · prueba gratis"><span class="ms" aria-hidden="true">redeem</span>Solicita tu prueba gratis</a>
+        <small>Windows 10 / 11 y macOS</small>
+      </div>
     </div>
   </div>
 </section>
@@ -561,6 +690,7 @@ footer a { color: #c9d3ea; }
           <select id="f-servicio" name="servicio" required>
             <option value="">Selecciona</option>
             <optgroup label="Factura Emprende"><option>Factura Emprende · plan Básico</option><option>Factura Emprende · plan Pro</option><option>Factura Emprende · plan Premium Plus</option><option>Compra de timbres</option></optgroup>
+            <optgroup label="IQ Fiscal XML"><option>IQ Fiscal XML · prueba gratis</option><option>IQ Fiscal XML · licencia mensual</option><option>IQ Fiscal XML · licencia anual</option></optgroup>
             <optgroup label="Despacho"><option>Contabilidad y declaraciones</option><option>Regularización fiscal</option><option>Devolución de IVA o ISR</option><option>Estímulo fiscal IVA 8 %</option><option>Nóminas e IMSS</option><option>Trámites ante el SAT</option><option>Planeación fiscal</option></optgroup>
             <option>Otro</option>
           </select></div>
@@ -678,6 +808,10 @@ if (WHATSAPP) {
   document.getElementById("wa-ir").href = base;
 }
 
+// Los botones de IQ Fiscal XML dejan elegido el servicio en el formulario de registro.
+document.querySelectorAll("[data-servicio]").forEach(a => a.addEventListener("click", () => {
+  document.getElementById("f-servicio").value = a.dataset.servicio;
+}));
 document.querySelectorAll("[data-copiar]").forEach(b => b.addEventListener("click", () => {
   const el = document.getElementById(b.dataset.copiar), t = el.textContent;
   const listo = () => { b.textContent = "Copiado"; setTimeout(() => (b.textContent = "Copiar"), 1800); };
